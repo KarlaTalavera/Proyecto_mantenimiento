@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 --la base de datos se llama mantenimiento_ascardiodb oiste negro malparido
 
 CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `usuario` varchar(50) NOT NULL UNIQUE,
