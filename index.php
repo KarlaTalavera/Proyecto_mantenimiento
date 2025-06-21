@@ -1,9 +1,10 @@
 <?php
-
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: vistas/login.php');
+    exit();
+}
 require_once 'config/conexion.php';
-$controlador = isset($_GET['controlador']) ? $_GET['controlador'] : 'usuario';
-
 require_once 'controladores/controladorUsuario.php';
-
 $controlador = new controladorUsuario();
 $controlador->mostrarUsuarios();

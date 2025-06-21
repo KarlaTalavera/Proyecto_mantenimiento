@@ -61,6 +61,14 @@ class modeloUsuario {
         $this->rol = $rol;
     }
 
+    public function obtenerUsuarioPorNombre($usuario) {
+    $sql = "SELECT * FROM usuarios WHERE usuario = :usuario LIMIT 1";
+    $stmt = $this->conexion->prepare($sql);
+    $stmt->bindParam(':usuario', $usuario);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
     public function agregarUsuario() {
         $sql = "INSERT INTO usuarios (nombre, apellido, usuario, contrasena, rol) VALUES (:nombre, :apellido, :usuario, :contrasena, :rol)";
         $stmt = $this->conexion->prepare($sql);

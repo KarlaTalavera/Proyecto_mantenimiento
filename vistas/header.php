@@ -22,7 +22,15 @@
                     </svg>
                     <span class="mantenimiento-text">Control de Mantenimiento</span>
                 </a>
-                <span class="ms-auto text-white">Bienvenido &lt;usuario&gt;</span>
+                <span class="ms-auto text-white">
+                    Bienvenido <?php
+                    if (isset($_SESSION['nombre'], $_SESSION['apellido'])) {
+                     echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']);
+                     } elseif (isset($_SESSION['usuario'])) {
+                          echo htmlspecialchars($_SESSION['usuario']);
+                     } 
+                     ?>
+                </span>
             </div>
         </nav>
     </header>
@@ -72,7 +80,7 @@
                 </li>
             </ul>
             <div class="sidebar-item">
-                <a href="#" class="sidebar-link">
+                <a href="vistas/logout.php" class="sidebar-link">
                     <i class="lni lni-exit text-danger fs-3"></i>
                     <span>Cerrar sesión</span>
                 </a>
