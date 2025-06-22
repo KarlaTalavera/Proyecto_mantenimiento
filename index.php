@@ -6,5 +6,15 @@ if (!isset($_SESSION['usuario'])) {
 }
 require_once 'config/conexion.php';
 require_once 'controladores/controladorUsuario.php';
-$controlador = new controladorUsuario();
-$controlador->mostrarUsuarios();
+
+$vista = $_GET['vista'] ?? 'usuarios';
+
+switch ($vista) {
+    case 'usuarios':
+        $controlador = new controladorUsuario();
+        $controlador->mostrarUsuarios();
+        break;
+    // Aquí puedes agregar más casos para otras vistas
+    default:
+        echo "Vista no encontrada";
+}

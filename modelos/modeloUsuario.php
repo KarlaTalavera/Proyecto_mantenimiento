@@ -67,7 +67,7 @@ class modeloUsuario {
     $stmt->bindParam(':usuario', $usuario);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
-}
+    }
 
     public function agregarUsuario() {
         $sql = "INSERT INTO usuarios (nombre, apellido, usuario, contrasena, rol) VALUES (:nombre, :apellido, :usuario, :contrasena, :rol)";

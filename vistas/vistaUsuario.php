@@ -1,4 +1,4 @@
-<?php include 'vistas/header.php'; ?>
+<?php include 'header.php'; ?>
 <div class="main p-3">
     <h1>Gestión de Usuarios</h1>
     <div class="titulo-linea"></div>
@@ -82,4 +82,4 @@
         </tbody>
     </table>
 </div>
-<?php include 'vistas/footer.php'; ?>
+<?php include 'footer.php'; ?>
