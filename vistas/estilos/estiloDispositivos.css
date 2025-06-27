@@ -1,0 +1,189 @@
+/* Centrar el formulario y darle estilo */
+.device-form {
+    background: #fff;
+    padding: 32px 32px 24px 32px;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(128,0,32,0.10);
+    margin-bottom: 32px;
+    width: 90%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Fila de campos en flex */
+.device-form .form-row {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+/* Para que los campos ocupen el mismo espacio */
+.device-form .flex-grow {
+    flex: 1 1 0;
+    margin-bottom: 16px;
+}
+
+/* Campos solo con borde inferior fino y gris */
+.device-form .form-control {
+    border: none;
+    border-bottom: 1.2px solid #bbb;
+    border-radius: 0;
+    padding: 10px 8px 10px 8px;
+    font-size: 1rem;
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+    transition: border-color 0.2s;
+}
+
+.device-form .form-control:focus {
+    border-bottom: 2px solid #a8324a;
+    background: #fafbfe;
+}
+
+/* Etiquetas */
+.device-form .form-label {
+    font-weight: 600;
+    color: #800020;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 4px;
+}
+
+/* Botón */
+.device-form button[name="registrar"] {
+    width: auto;
+    min-width: 120px;
+    padding: 10px 28px;
+    border-radius: 4px;
+    border: none;
+    background: #800020;
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 0;
+    margin-right: auto;
+    display: block;
+    text-align: left;
+}
+
+.device-form button[name="registrar"]:hover {
+    background: #a8324a;
+}
+
+/* Mensaje de error */
+.alert-danger {
+    color: #fff;
+    background-color: #a8324a;
+    border-color: #a8324a;
+}
+
+/* Buscador */
+.device-table-search {
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    font-size: 1rem;
+    background: #fafbfe;
+    box-sizing: border-box;
+}
+
+/* Tabla de dispositivos */
+.device-table {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 32px auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(128,0,32,0.10);
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.device-table th, .device-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.device-table th {
+    background: #800020;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+.device-table tr:last-child td {
+    border-bottom: none;
+}
+
+.device-table tr:hover {
+    background: #f9e6ec;
+    transition: background 0.2s;
+}
+
+.device-table td {
+    color: #333;
+    vertical-align: middle;
+}
+
+.device-table th:first-child,
+.device-table td:first-child {
+    text-align: center;
+    width: 50px;
+}
+
+.device-table th, .device-table td {
+    /* Para bordes redondeados solo en las esquinas */
+    position: relative;
+}
+.device-table th:first-child {
+    border-top-left-radius: 10px;
+}
+.device-table th:last-child {
+    border-top-right-radius: 10px;
+}
+.device-table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+.device-table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+.device-form .form-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.device-form .btn-secondary {
+    background: #bbb;
+    color: #222;
+    border: none;
+    transition: background 0.2s;
+}
+.device-form .btn-secondary:hover {
+    background: #999;
+    color: #fff;
+}

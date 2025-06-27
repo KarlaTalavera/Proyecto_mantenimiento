@@ -22,9 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($datos['rol'] === 'administrador') {
                 header('Location: ../index.php');
             } else {
-                // Aquí puedes poner la ruta de la interfaz de usuario normal
-                // Por ahora, solo muestra un mensaje
-                header('Location: bienvenida_usuario.php');
+                echo "qlq";
             }
             exit();
         } else {

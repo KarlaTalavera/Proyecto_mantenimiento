@@ -11,24 +11,28 @@ class controladorUsuario {
     }
 
     public function mostrarUsuarios() {
-        // Procesar formulario de registro o edición
+        $error = '';
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (isset($_POST['registrar'])) {
-
-                if ($this->modelo->usuarioExiste($_POST['usuario'])) {
-                echo "<script>alert('El usuario ya existe');window.location='index.php';</script>";
-                exit();
+            if ($this->modelo->usuarioExiste($_POST['usuario'])) {
+                $error = "El usuario '" . htmlspecialchars($_POST['usuario']) . "' ya existe";
+            } else {
+                try {
+                    $this->modelo->setNombre($_POST['nombre']);
+                    $this->modelo->setApellido($_POST['apellido']);
+                    $this->modelo->setUsuario($_POST['usuario']);
+                    $this->modelo->setContrasena($_POST['contrasena']);
+                    $this->modelo->setRol($_POST['rol']);
+                    $this->modelo->agregarUsuario();
+                    header("Location: index.php");
+                    exit();
+                } catch (PDOException $e) {
+                    $error = "Error al registrar usuario: " . $e->getMessage();
                 }
-                $this->modelo->setNombre($_POST['nombre']);
-                $this->modelo->setApellido($_POST['apellido']);
-                $this->modelo->setUsuario($_POST['usuario']);
-                $this->modelo->setContrasena($_POST['contrasena']);
-                $this->modelo->setRol($_POST['rol']);
-                $this->modelo->agregarUsuario();
-                header("Location: index.php");
-                exit();
             }
+        }
             if (isset($_POST['actualizar'])) {
                 $this->modelo->setId($_POST['id']);
                 $this->modelo->setNombre($_POST['nombre']);
@@ -40,14 +44,15 @@ class controladorUsuario {
                 } else {
                     $this->modelo->setContrasena(null);
                 }
+
                 // Verifica duplicado excluyendo el usuario actual
                 if ($this->modelo->usuarioExiste($_POST['usuario'], $_POST['id'])) {
-                    echo "<script>alert('El usuario ya existe');window.location='index.php';</script>";
+                    $error = "El usuario '" . htmlspecialchars($_POST['usuario']) . "' ya existe";
+                } else {
+                    $this->modelo->editarUsuario();
+                    header("Location: index.php");
                     exit();
                 }
-                $this->modelo->editarUsuario();
-                header("Location: index.php");
-                exit();
             }
         }
 
@@ -76,3 +81,4 @@ class controladorUsuario {
         require dirname(__DIR__) . '/vistas/vistaUsuario.php';
     }
 }
+

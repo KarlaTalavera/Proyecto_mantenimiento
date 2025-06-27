@@ -2,6 +2,9 @@
 <div class="main p-3">
     <h1>Gestión de Usuarios</h1>
     <div class="titulo-linea"></div>
+     <?php if (!empty($error)): ?>
+        <div class="alert alert-danger mt-2"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
     <!-- Formulario de registro o edición -->
         <?php if (isset($usuarioEditar) && $usuarioEditar): ?>
             <form method="POST" class="user-form mb-4">
@@ -71,8 +74,8 @@
                         <td><?php echo htmlspecialchars($usuario['usuario']); ?></td>
                         <td><?php echo htmlspecialchars($usuario['rol']); ?></td>
                         <td>
-                            <a href="index.php?editar=<?php echo $usuario['id']; ?>">Editar</a> |
-                            <a href="index.php?eliminar=<?php echo $usuario['id']; ?>" onclick="return confirm('¿Seguro?')">Eliminar</a>
+                            <a href="index.php?editar=<?php echo $usuario['id']; ?>" class="btn btn-sm btn-warning">Editar</a> |
+                            <a href="index.php?eliminar=<?php echo $usuario['id']; ?>" class="btn btn-sm btn-danger " onclick="return confirm('¿Seguro?')">Eliminar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

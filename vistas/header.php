@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/style.css">
+    <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/estiloDispositivos.css">
+    <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/estiloUsuarios.css">
 </head>
 
 <body>
@@ -79,7 +81,7 @@
                     </a>
                 </li>
                  <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="index.php?vista=dispositivos" class="sidebar-link">
                         <svg width="16" height="16" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
                             <path d="M18.1551 7.03906V6.87162C18.1551 6.26272 17.9083 5.67982 17.4711 5.25602L16.3139 4.1344C15.8942 3.72753 15.3325 3.5 14.7479 3.5H8.09493C6.85229 3.5 5.84493 4.50736 5.84493 5.75V7.03906H18.1551Z" fill="#343C54"/>
                             <path d="M5.50049 8.03906C4.25785 8.03906 3.25049 9.04642 3.25049 10.2891V14.2076C3.25049 15.2221 3.92196 16.0798 4.84473 16.3605V14.1953C4.84473 13.2288 5.62823 12.4453 6.59473 12.4453H17.4049C18.3714 12.4453 19.1549 13.2288 19.1549 14.1953V16.3606C20.0779 16.0801 20.7496 15.2223 20.7496 14.2076V10.2891C20.7496 9.04642 19.7422 8.03906 18.4996 8.03906H5.50049Z" fill="#343C54"/>
