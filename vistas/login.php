@@ -15,10 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $datos = $modelo->obtenerUsuarioPorNombre($usuario);
 
         if ($datos && password_verify($contrasena, $datos['contrasena'])) {
-            $_SESSION['usuario'] = $datos['usuario'];
-            $_SESSION['rol'] = $datos['rol'];
-            $_SESSION['nombre'] = $datos['nombre'];
-            $_SESSION['apellido'] = $datos['apellido'];
+            $_SESSION['usuario'] = [
+            'id' => $datos['id'],
+            'usuario' => $datos['usuario'],
+            'rol' => $datos['rol'],
+            'nombre' => $datos['nombre'],
+            'apellido' => $datos['apellido']
+        ];
             if ($datos['rol'] === 'administrador') {
                 header('Location: ../index.php');
             } else {

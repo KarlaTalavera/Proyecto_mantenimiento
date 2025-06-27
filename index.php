@@ -6,7 +6,8 @@ if (!isset($_SESSION['usuario'])) {
 }
 require_once 'config/conexion.php';
 require_once 'controladores/controladorUsuario.php';
-require_once 'controladores/contoladorDispositivo.php';
+require_once 'controladores/controladorDispositivo.php';
+require_once 'controladores/controladorMantenimiento.php';
 
 $vista = $_GET['vista'] ?? 'usuarios';
 
@@ -16,8 +17,12 @@ switch ($vista) {
         $controlador->mostrarUsuarios();
         break;
      case 'dispositivos':
-        $controlador = new contoladorDispositivo();
+        $controlador = new controladorDispositivo();
         $controlador->mostrarDispositivos();
+        break;
+     case 'mantenimiento':
+        $controlador = new controladorMantenimiento();
+        $controlador->mostrarMantenimientos();
         break;
     default:
         echo "Vista no encontrada";

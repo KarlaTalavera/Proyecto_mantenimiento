@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__DIR__) . '/modelos/modeloDispositivo.php';
 
-class contoladorDispositivo {
+class controladorDispositivo {
     private $modelo;
 
     public function __construct() {

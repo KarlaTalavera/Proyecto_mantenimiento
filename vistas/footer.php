@@ -7,5 +7,23 @@
     <footer class="text-center py-3" style="background: #f8f9fa; color: #800020;">
      ASCARDIO &copy; 2025. Todos los derechos reservados.
     </footer>
+    <script>
+    const fechasUltimo = <?= json_encode($fechasUltimo) ?>;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const select = document.getElementById('codigo_dispositivo');
+        const fechaInput = document.getElementById('fecha_ultimo_mantenimiento');
+        if (select && fechaInput) {
+            select.addEventListener('change', function() {
+                const codigo = this.value;
+                if (fechasUltimo[codigo]) {
+                    fechaInput.value = fechasUltimo[codigo];
+                } else {
+                    fechaInput.value = '';
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>

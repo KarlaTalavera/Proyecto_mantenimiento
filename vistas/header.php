@@ -26,12 +26,12 @@
                 </a>
                 <span class="ms-auto text-white">
                     Bienvenido <?php
-                    if (isset($_SESSION['nombre'], $_SESSION['apellido'])) {
-                     echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']);
-                     } elseif (isset($_SESSION['usuario'])) {
-                          echo htmlspecialchars($_SESSION['usuario']);
-                     } 
-                     ?>
+                    if (isset($_SESSION['usuario']['nombre'], $_SESSION['usuario']['apellido'])) {
+                        echo htmlspecialchars($_SESSION['usuario']['nombre'] . ' ' . $_SESSION['usuario']['apellido']);
+                    } elseif (isset($_SESSION['usuario']['usuario'])) {
+                        echo htmlspecialchars($_SESSION['usuario']['usuario']);
+                    }
+                ?>
                 </span>
             </div>
         </nav>
@@ -71,7 +71,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="index.php?vista=mantenimiento" class="sidebar-link">
                         <svg width="16" height="16" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
                             <path d="M14.1362 4.81223L14.0173 4.0966C13.8941 3.35513 13.2527 2.81152 12.5011 2.81152C11.7501 2.81152 11.109 3.35433 10.9852 4.09511L10.8653 4.81223H6.66553C6.25131 4.81223 5.91553 5.14802 5.91553 5.56223V9.74583C5.91553 10.16 6.25131 10.4958 6.66553 10.4958H18.3364C18.7506 10.4958 19.0864 10.16 19.0864 9.74583V9.56223C19.0864 6.93888 16.9598 4.81223 14.3364 4.81223H14.1362Z" fill="#343C54"/>
                             <path d="M14.6797 11.4961H10.3213L9.83717 20.4406C9.76742 21.7292 10.7935 22.8122 12.0839 22.8122H12.9171C14.2075 22.8122 15.2336 21.7292 15.1638 20.4406L14.6797 11.4961Z" fill="#343C54"/>
