@@ -54,11 +54,12 @@
             <?php endif; ?>
         </form>
 
+          <div style="height:40px"></div>
+
     <h1>Tabla de dispositivos</h1>
     <div class="titulo-linea"></div>
-    <input type="text" id="searchDeviceInput" class="device-table-search" placeholder="Buscar dispositivo...">
 
-    <table class="device-table" id="deviceTable">
+    <table class="device-table" id="deviceTable"  class="datatable">
         <thead>
             <tr>
                 <th>N°</th>

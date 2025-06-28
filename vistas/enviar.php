@@ -36,7 +36,7 @@ try {
     $mail->Body    = '
     <div style="font-family: Arial, sans-serif; background: #f7f7f7; padding: 30px;">
         <div style="max-width: 500px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #e0e0e0; padding: 24px;">
-            <h2 style="color:rgb(68, 24, 24); border-bottom: 1px solid #eee; padding-bottom: 10px;">Nuevo Mantenimiento Programado</h2>
+            <h2 style="color:rgb(163, 52, 52); border-bottom: 1px solid #eee; padding-bottom: 10px;">Nuevo Mantenimiento Programado</h2>
             <table style="width:100%; border-collapse:collapse; font-size:16px;">
                 <tr>
                     <td style="padding:8px 0; color:#555;"><b>Dispositivo:</b></td>

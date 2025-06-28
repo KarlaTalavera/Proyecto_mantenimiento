@@ -104,9 +104,10 @@
 
 /* Tabla de dispositivos */
 .device-table {
-    width: 100%;
+    width: calc(100% - 48px) !important;
     max-width: 900px;
-    margin: 0 auto 32px auto;
+    margin-left: 24px;
+    margin-right: 24px;
     border-collapse: separate;
     border-spacing: 0;
     background: #fff;

@@ -15,26 +15,18 @@
                     <option value="">Seleccione...</option>
                     <?php foreach ($dispositivos as $d): ?>
                         <option value="<?= htmlspecialchars($d['codigo_dispositivo']) ?>"
-                            <?= (isset($_POST['codigo_dispositivo']) && $_POST['codigo_dispositivo'] == $d['codigo_dispositivo']) ? 'selected' : '' ?>>
+                            <?php
+                                if ($editando && $mantenimientoEditar && $mantenimientoEditar['codigo_dispositivo'] == $d['codigo_dispositivo']) {
+                                    echo 'selected';
+                                } elseif (isset($_POST['codigo_dispositivo']) && $_POST['codigo_dispositivo'] == $d['codigo_dispositivo']) {
+                                    echo 'selected';
+                                }
+                            ?>>
                             <?= htmlspecialchars($d['codigo_dispositivo']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
             </label>
-            <?php if ($editando): ?>
-            <label class="form-label flex-grow">
-                Persona Asignada
-                <select class="form-control" name="persona_asignada">
-                    <option value="">Sin asignar</option>
-                    <?php foreach ($usuarios as $u): ?>
-                        <option value="<?= htmlspecialchars($u['id']) ?>"
-                            <?= ($mantenimientoEditar['persona_asignada'] == $u['id']) ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($u['nombre'] . ' ' . $u['apellido']) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </label>
-            <?php endif; ?>
         </section>
         <section class="form-row">
             <label class="form-label flex-grow">
@@ -73,10 +65,11 @@
         </div>
     </form>
 
+    <div style="height:40px"></div>
     <!-- Tabla de Próximos Mantenimientos -->
     <h1>Próximos Mantenimientos</h1>
     <div class="titulo-linea"></div>
-    <table class="device-table">
+    <table class="device-table" id= "pendientes">
         <thead>
             <tr>
                 <th>ID</th>
@@ -84,8 +77,7 @@
                 <th>Último</th>
                 <th>Próximo</th>
                 <th>Descripción</th>
-                <th>Persona Asignada</th>
-
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -97,26 +89,21 @@
                     <td><?= htmlspecialchars($m['fecha_proximo_mantenimiento']) ?></td>
                     <td><?= htmlspecialchars($m['descripcion_proximo_mantenimiento']) ?></td>
                     <td>
-                        <?php
-                        $persona = '';
-                        foreach ($usuarios as $u) {
-                            if ($u['id'] == $m['persona_asignada']) {
-                                $persona = $u['nombre'] . ' ' . $u['apellido'];
-                                break;
-                            }
-                        }
-                        echo $persona ?: 'Sin asignar';
-                        ?>
+                        <div class="d-flex gap-2">
+                            <a href="index.php?vista=mantenimiento&editar=<?= urlencode($m['id']) ?>" class="btn btn-sm btn-warning">Editar</a> |
+                            <a href="index.php?vista=mantenimiento&eliminar=<?= urlencode($m['id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este dispositivo?')">Eliminar</a>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+    <div style="height:40px"></div>
 
-    <!-- Tabla de Mantenimientos Pendientes -->
     <h1>Mantenimientos Pendientes</h1>
     <div class="titulo-linea"></div>
-    <table class="device-table" id="pendientes">
+    <!-- Tabla de Mantenimientos Pendientes -->
+    <table class="device-table" id="pendientes"  class="datatable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -125,13 +112,13 @@
                 <th>Próximo</th>
                 <th>Descripción</th>
                 <th>Persona Asignada</th>
-                <th>Acción</th>
-                <th>Estado</th>
+                <th class="text-center">Acción</th>
+                <th class="text-center">Estado</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($pendientes as $m): ?>
-                 <?php if (!empty($m['fecha_realizado'])) continue; // Oculta los realizados ?>
+                <?php if (!empty($m['fecha_realizado'])) continue; ?>
                 <tr>
                     <td><?= htmlspecialchars($m['id']) ?></td>
                     <td><?= htmlspecialchars($m['codigo_dispositivo']) ?></td>
@@ -150,30 +137,36 @@
                         echo $persona ?: 'Sin asignar';
                         ?>
                     </td>
-                    <td>
+
+                    <!-- COLUMNA ACCIÓN CENTRADA -->
+                   <td class="text-center align-middle">
                         <?php if (!$m['persona_asignada']): ?>
-                            <form method="POST" action="index.php?vista=mantenimiento#pendientes">
+                            <form method="POST" action="index.php?vista=mantenimiento#pendientes" class="d-inline-block">
                                 <input type="hidden" name="tomar_mantenimiento" value="<?= $m['id'] ?>">
-                                <button type="submit" class="btn btn-primary btn-sm">Tomar mantenimiento</button>
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Realizar este mantenimiento</button>
                             </form>
+                        <?php elseif ($m['persona_asignada'] == $_SESSION['usuario']['id']): ?>
+                            <span class="badge bg-info text-dark">Tomado por mí</span>
                         <?php else: ?>
-                            <span class="badge bg-success">En proceso</span>
+                            <span class="badge bg-success">Tomado</span>
                         <?php endif; ?>
                     </td>
-                    <td>
+
+                    <!-- COLUMNA ESTADO CENTRADA -->
+                    <td class="text-center align-middle">
                         <?php if (
                             $m['persona_asignada'] 
                             && $m['persona_asignada'] == $_SESSION['usuario']['id'] 
                             && empty($m['fecha_realizado'])
                         ): ?>
-                            <form method="POST" action="index.php?vista=mantenimiento#pendientes">
+                            <form method="POST" action="index.php?vista=mantenimiento#pendientes" class="d-inline-block">
                                 <input type="hidden" name="realizar_mantenimiento" value="<?= $m['id'] ?>">
-                                <button type="submit" class="btn btn-success btn-sm">Mantenimiento realizado</button>
+                                <button type="submit" class="btn btn-sm btn-outline-success">Mantenimiento realizado</button>
                             </form>
                         <?php elseif (!empty($m['fecha_realizado'])): ?>
                             <span class="badge bg-success">Realizado</span>
                         <?php elseif ($m['persona_asignada']): ?>
-                            <span class="badge bg-warning">En proceso</span>
+                            <span class="badge bg-warning text-dark">Por confirmación</span>
                         <?php else: ?>
                             <span class="badge bg-secondary">Pendiente</span>
                         <?php endif; ?>
@@ -182,5 +175,6 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    <div style="height:48px"></div>
 </div>
 <?php include 'footer.php'; ?>

@@ -44,18 +44,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Buscador de dispositivos
-    const searchDeviceInput = document.getElementById('searchDeviceInput');
-    const deviceTable = document.getElementById('deviceTable');
-    if (searchDeviceInput && deviceTable) {
-        searchDeviceInput.addEventListener('keyup', function() {
-            const filter = this.value.toLowerCase();
-            const rows = deviceTable.querySelectorAll('tbody tr');
-            rows.forEach(function(row) {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.indexOf(filter) > -1 ? '' : 'none';
-            });
-        });
-    }
-
 });

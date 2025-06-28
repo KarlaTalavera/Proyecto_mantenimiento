@@ -25,5 +25,32 @@
         }
     });
 </script>
+<script>
+$('table').DataTable({
+    dom: '<"datatable-header d-flex justify-content-between align-items-center mb-3"<"datatable-search"f><"datatable-length"l>>' +
+       'rt' +
+       '<"row mt-2"<"col-md-6"i><"col-md-6 text-end"p>>',
+  language: {
+    lengthMenu: "Mostrar _MENU_ registros por página",
+    zeroRecords: "No se encontraron resultados",
+    info: "Mostrando página _PAGE_ de _PAGES_",
+    infoEmpty: "No hay registros disponibles",
+    infoFiltered: "(filtrado de _MAX_ registros totales)",
+    search: "Buscar:",
+    paginate: {
+      next: "Siguiente",
+      previous: "Anterior"
+    }
+  },
+  pageLength: 10,
+  lengthChange: true,
+  searching: true,
+  ordering: true,
+  info: true,
+  autoWidth: false
+});
+</script>
+
+
 </body>
 </html>

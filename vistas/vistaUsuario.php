@@ -46,11 +46,9 @@
         <?php endif; ?>
 
     <!-- Buscador -->
-
+  <div style="height:40px"></div>
     <h1>Tabla de registros</h1>
     <div class="titulo-linea"></div>
-    <input type="text" id="searchInput" class="user-table-search" placeholder="Buscar usuario...">
-
     <!-- Tabla de usuarios -->
     <table class="user-table" id="userTable">
         <thead>
