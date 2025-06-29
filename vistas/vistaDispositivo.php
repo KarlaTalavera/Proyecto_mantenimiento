@@ -3,6 +3,7 @@
 <div class="main p-3">
     <h1>Gestión de Dispositivos</h1>
     <div class="titulo-linea"></div>
+        <!-- este formulario sirve para registrar o editar dispositivos, segun si estas en modo edicion o no -->
         <form method="POST" id="formDispositivo" class="device-form">
             <section class="form-row">
                 <label class="form-label flex-grow" for="ubicacion">
@@ -42,23 +43,27 @@
             </section>
             <div class="form-buttons">
             <?php if (isset($editando) && $editando): ?>
+                <!-- si estas editando, muestra el boton de actualizar y el de cancelar -->
                 <input type="hidden" name="codigo_original" value="<?= htmlspecialchars($dispositivoEditar['codigo_dispositivo']) ?>">
                 <button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button>
                 <a href="index.php?vista=dispositivos" class="btn btn-secondary" style="margin-left:10px;">Cancelar</a>
             <?php else: ?>
+                <!-- si no, solo muestra el boton de registrar -->
                 <button type="submit" name="registrar" class="btn btn-primary">Registrar</button>
             <?php endif; ?>
             </div>
             <?php if (!empty($error)): ?>
+                <!-- si hay un error, lo muestra arriba del formulario -->
                 <div class="alert alert-danger mt-2"><?= $error ?></div>
             <?php endif; ?>
         </form>
 
-          <div style="height:40px"></div>
+    <div style="height:40px"></div>
 
     <h1>Tabla de dispositivos</h1>
     <div class="titulo-linea"></div>
 
+    <!-- aca se muestra la tabla con todos los dispositivos registrados -->
     <table class="device-table" id="deviceTable"  class="datatable">
         <thead>
             <tr>
@@ -81,8 +86,12 @@
                         <td><?= htmlspecialchars($ubicaciones[$dispositivo['ubicacion']] ?? $dispositivo['ubicacion']) ?></td>
                         <td><?= htmlspecialchars($dispositivo['numero_identificador']) ?></td>
                         <td>
-                            <a href="index.php?vista=dispositivos&editar=<?= urlencode($dispositivo['codigo_dispositivo']) ?>" class="btn btn-sm btn-warning">Editar</a> |
-                            <a href="index.php?vista=dispositivos&eliminar=<?= urlencode($dispositivo['codigo_dispositivo']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este dispositivo?')">Eliminar</a>
+                            <div style="display:flex;align-items:center;gap:6px;">
+                                <!-- los botones para editar o eliminar el dispositivo -->
+                                <a href="index.php?vista=dispositivos&editar=<?= urlencode($dispositivo['codigo_dispositivo']) ?>" class="btn btn-sm btn-warning">Editar</a>
+                                <span>|</span>
+                                <a href="index.php?vista=dispositivos&eliminar=<?= urlencode($dispositivo['codigo_dispositivo']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este dispositivo?')">Eliminar</a>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -94,6 +103,7 @@
 </div>
 
 <script>
+// este script actualiza el codigo del dispositivo automaticamente segun los campos seleccionados
 document.addEventListener('DOMContentLoaded', function() {
     function actualizarCodigo() {
         const ubicacion = document.getElementById('ubicacion').value.trim().toUpperCase();

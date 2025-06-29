@@ -41,6 +41,10 @@ body {
     width: 100%;
     overflow: hidden;
     background-color: #fafbfe;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
 #sidebar{
@@ -73,7 +77,6 @@ body {
     border: 0;
     padding: 1rem 1.5rem;
 }
-
 
 
 #sidebar:not(.expand) .sidebar-item:last-child i {
@@ -148,7 +151,6 @@ header {
 .main {
     margin-top: 65px; /* Para que el contenido no quede debajo del header */
     margin-left: 70px; 
-    transition: margin-left 0.25s;
 }
 
 #sidebar.expand ~ .main {

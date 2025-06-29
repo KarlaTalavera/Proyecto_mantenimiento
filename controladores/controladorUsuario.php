@@ -11,28 +11,32 @@ class controladorUsuario {
     }
 
     public function mostrarUsuarios() {
+        // inicializa la variable de error
         $error = '';
 
+        // maneja las acciones del formulario post
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+            // si se envia el formulario de registro, intenta agregar el usuario
             if (isset($_POST['registrar'])) {
-            if ($this->modelo->usuarioExiste($_POST['usuario'])) {
-                $error = "El usuario '" . htmlspecialchars($_POST['usuario']) . "' ya existe";
-            } else {
-                try {
-                    $this->modelo->setNombre($_POST['nombre']);
-                    $this->modelo->setApellido($_POST['apellido']);
-                    $this->modelo->setUsuario($_POST['usuario']);
-                    $this->modelo->setContrasena($_POST['contrasena']);
-                    $this->modelo->setRol($_POST['rol']);
-                    $this->modelo->agregarUsuario();
-                    header("Location: index.php");
-                    exit();
-                } catch (PDOException $e) {
-                    $error = "Error al registrar usuario: " . $e->getMessage();
+                if ($this->modelo->usuarioExiste($_POST['usuario'])) {
+                    $error = "El usuario '" . htmlspecialchars($_POST['usuario']) . "' ya existe";
+                } else {
+                    try {
+                        $this->modelo->setNombre($_POST['nombre']);
+                        $this->modelo->setApellido($_POST['apellido']);
+                        $this->modelo->setUsuario($_POST['usuario']);
+                        $this->modelo->setContrasena($_POST['contrasena']);
+                        $this->modelo->setRol($_POST['rol']);
+                        $this->modelo->agregarUsuario();
+                        header("Location: index.php");
+                        exit();
+                    } catch (PDOException $e) {
+                        $error = "Error al registrar usuario: " . $e->getMessage();
+                    }
                 }
             }
-        }
+            // si se envia el formulario de actualizacion, procesa la edicion del usuario
             if (isset($_POST['actualizar'])) {
                 $this->modelo->setId($_POST['id']);
                 $this->modelo->setNombre($_POST['nombre']);
@@ -45,7 +49,7 @@ class controladorUsuario {
                     $this->modelo->setContrasena(null);
                 }
 
-                // Verifica duplicado excluyendo el usuario actual
+                // verifica si el usuario ya existe, excluyendo el usuario actual
                 if ($this->modelo->usuarioExiste($_POST['usuario'], $_POST['id'])) {
                     $error = "El usuario '" . htmlspecialchars($_POST['usuario']) . "' ya existe";
                 } else {
@@ -56,7 +60,7 @@ class controladorUsuario {
             }
         }
 
-        // Si viene el parámetro editar, busca el usuario
+        // si viene el parametro editar, busca el usuario correspondiente
         $usuarioEditar = null;
         if (isset($_GET['editar'])) {
             $idEditar = $_GET['editar'];
@@ -69,15 +73,16 @@ class controladorUsuario {
             }
         }
 
+        // si viene el parametro eliminar, elimina el usuario
         if (isset($_GET['eliminar'])) {
             $this->modelo->setId($_GET['eliminar']);
-             $this->modelo->eliminarUsuario();
-             header("Location: index.php");
-             exit();
-            }
-        // Obtener usuarios para la tabla
+            $this->modelo->eliminarUsuario();
+            header("Location: index.php");
+            exit();
+        }
+        // obtiene la lista de usuarios para la tabla
         $usuarios = $this->modelo->obtenerUsuarios();
-        // Mostrar la vista y pasar los usuarios y el usuario a editar
+        // muestra la vista y pasa los usuarios y el usuario a editar
         require dirname(__DIR__) . '/vistas/vistaUsuario.php';
     }
 }

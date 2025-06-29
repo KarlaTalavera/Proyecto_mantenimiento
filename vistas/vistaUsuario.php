@@ -1,59 +1,65 @@
 <?php include 'header.php'; ?>
+
 <div class="main p-3">
     <h1>Gestión de Usuarios</h1>
     <div class="titulo-linea"></div>
-     <?php if (!empty($error)): ?>
-        <div class="alert alert-danger mt-2"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
-    <!-- Formulario de registro o edición -->
+    <!-- este formulario sirve para registrar o editar usuarios -->
+    <form method="POST" class="device-form mb-4">
         <?php if (isset($usuarioEditar) && $usuarioEditar): ?>
-            <form method="POST" class="user-form mb-4">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars($usuarioEditar['id']); ?>">
-                <div class="form-row">
-                    <input type="text" name="nombre" placeholder="Nombre" required value="<?php echo htmlspecialchars($usuarioEditar['nombre']); ?>">
-                    <input type="text" name="apellido" placeholder="Apellido" required value="<?php echo htmlspecialchars($usuarioEditar['apellido']); ?>">
-                </div>
-                <div class="form-row">
-                    <input type="text" name="usuario" placeholder="Usuario" required value="<?php echo htmlspecialchars($usuarioEditar['usuario']); ?>">
-                    <input type="password" name="contrasena" placeholder="Contraseña">
-                </div>
-                <select name="rol" required>
-                    <option value="administrador" <?php if($usuarioEditar['rol']=='administrador') echo 'selected'; ?>>Administrador</option>
-                    <option value="usuario" <?php if($usuarioEditar['rol']=='usuario') echo 'selected'; ?>>Usuario</option>
-                </select>
-                <div class="edit-actions">
-                    <button type="submit" name="actualizar">Actualizar</button>
-                    <a href="index.php" class="btn-secondary">Cancelar</a>
-                </div>
-            </form>
-        <?php else: ?>
-            <form method="POST" class="user-form mb-4">
-                <div class="form-row">
-                    <input type="text" name="nombre" placeholder="Nombre" required>
-                    <input type="text" name="apellido" placeholder="Apellido" required>
-                </div>
-                <div class="form-row">
-                    <input type="text" name="usuario" placeholder="Nombre de Usuario" required>
-                    <input type="password" name="contrasena" placeholder="Contraseña" required>
-                </div>
-                <select name="rol" required>
-                    <option value="">Seleccione Rol</option>
-                    <option value="administrador">Administrador</option>
-                    <option value="usuario">Usuario</option>
-                </select>
-                <button type="submit" name="registrar">Registrar</button>
-            </form>
+            <input type="hidden" name="id" value="<?= htmlspecialchars($usuarioEditar['id']) ?>">
         <?php endif; ?>
+        <section class="form-row">
+            <label class="form-label flex-grow">
+                Nombre
+                <input type="text" class="form-control" name="nombre" required value="<?= isset($usuarioEditar) && $usuarioEditar ? htmlspecialchars($usuarioEditar['nombre']) : '' ?>">
+            </label>
+            <label class="form-label flex-grow">
+                Apellido
+                <input type="text" class="form-control" name="apellido" required value="<?= isset($usuarioEditar) && $usuarioEditar ? htmlspecialchars($usuarioEditar['apellido']) : '' ?>">
+            </label>
+        </section>
+        <section class="form-row">
+            <label class="form-label flex-grow">
+                Usuario
+                <input type="text" class="form-control" name="usuario" required value="<?= isset($usuarioEditar) && $usuarioEditar ? htmlspecialchars($usuarioEditar['usuario']) : '' ?>">
+            </label>
+            <label class="form-label flex-grow">
+                Contraseña
+                <input type="password" class="form-control" name="contrasena" <?= isset($usuarioEditar) && $usuarioEditar ? '' : 'required' ?>>
+            </label>
+            <label class="form-label flex-grow">
+                Rol
+                <select class="form-control" name="rol" required>
+                    <option value="">Seleccione...</option>
+                    <option value="administrador" <?= (isset($usuarioEditar) && $usuarioEditar && $usuarioEditar['rol'] == 'administrador') ? 'selected' : '' ?>>Administrador</option>
+                    <option value="usuario" <?= (isset($usuarioEditar) && $usuarioEditar && $usuarioEditar['rol'] == 'usuario') ? 'selected' : '' ?>>Usuario</option>
+                </select>
+            </label>
+        </section>
+        <div class="form-buttons">
+            <?php if (isset($usuarioEditar) && $usuarioEditar): ?>
+                <!-- si estas editando, muestra el boton de actualizar y el de cancelar -->
+                <button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button>
+                <a href="index.php?vista=usuarios" class="btn btn-secondary">Cancelar</a>
+            <?php else: ?>
+                <!-- si no, solo muestra el boton de registrar -->
+                <button type="submit" name="registrar" class="btn btn-primary">Registrar</button>
+            <?php endif; ?>
+        </div>
+        <?php if (!empty($error)): ?>
+            <!-- si hay un error, lo muestra arriba del formulario -->
+            <div class="alert alert-danger mt-2"><?= $error ?></div>
+        <?php endif; ?>
+    </form>
 
-    <!-- Buscador -->
-  <div style="height:40px"></div>
-    <h1>Tabla de registros</h1>
+    <div style="height:40px"></div>
+    <h1>Tabla de usuarios</h1>
     <div class="titulo-linea"></div>
-    <!-- Tabla de usuarios -->
-    <table class="user-table" id="userTable">
+    <!-- aca se muestra la tabla con todos los usuarios registrados -->
+    <table class="device-table" id="usuariosTable">
         <thead>
             <tr>
-                <th>N°</th>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Usuario</th>
@@ -62,24 +68,23 @@
             </tr>
         </thead>
         <tbody>
-           <?php $contador = 1;?>
-            <?php if (!empty($usuarios)): ?>
-                <?php foreach ($usuarios as $usuario): ?>
-                    <tr>
-                        <td><?php echo $contador++; ?></td>
-                        <td><?php echo htmlspecialchars($usuario['nombre']); ?></td>
-                        <td><?php echo htmlspecialchars($usuario['apellido']); ?></td>
-                        <td><?php echo htmlspecialchars($usuario['usuario']); ?></td>
-                        <td><?php echo htmlspecialchars($usuario['rol']); ?></td>
-                        <td>
-                            <a href="index.php?editar=<?php echo $usuario['id']; ?>" class="btn btn-sm btn-warning">Editar</a> |
-                            <a href="index.php?eliminar=<?php echo $usuario['id']; ?>" class="btn btn-sm btn-danger " onclick="return confirm('¿Seguro?')">Eliminar</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr><td colspan="6">No hay usuarios registrados.</td></tr>
-            <?php endif; ?>
+            <?php foreach ($usuarios as $u): ?>
+                <tr>
+                    <td><?= htmlspecialchars($u['id']) ?></td>
+                    <td><?= htmlspecialchars($u['nombre']) ?></td>
+                    <td><?= htmlspecialchars($u['apellido']) ?></td>
+                    <td><?= htmlspecialchars($u['usuario']) ?></td>
+                    <td><?= htmlspecialchars($u['rol']) ?></td>
+                    <td>
+                        <div style="display:flex;align-items:center;gap:6px;">
+                            <!-- los botones para editar o eliminar el usuario -->
+                            <a href="index.php?vista=usuarios&editar=<?= urlencode($u['id']) ?>" class="btn btn-sm btn-warning">Editar</a>
+                            <span>|</span>
+                            <a href="index.php?vista=usuarios&eliminar=<?= urlencode($u['id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este usuario?')">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>

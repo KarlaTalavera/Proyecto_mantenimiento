@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
+    <!-- incluye los estilos y scripts necesarios para la interfaz -->
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -12,13 +13,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
-
+    <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/estiloFallo.css">
     <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/style.css">
     <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/estiloDispositivos.css">
     <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/estiloUsuarios.css">
 </head>
 
 <body>
+    <!-- barra de navegacion principal -->
     <header>    
         <nav class="navbar navbar-expand-lg" style="background-color: #800020;">
             <div class="container-fluid">
@@ -30,6 +32,7 @@
                     <span class="mantenimiento-text">Control de Mantenimiento</span>
                 </a>
                 <span class="ms-auto text-white">
+                    <!-- muestra el nombre y apellido del usuario si existen, si no muestra el usuario -->
                     Bienvenido <?php
                     if (isset($_SESSION['usuario']['nombre'], $_SESSION['usuario']['apellido'])) {
                         echo htmlspecialchars($_SESSION['usuario']['nombre'] . ' ' . $_SESSION['usuario']['apellido']);
@@ -42,6 +45,7 @@
         </nav>
     </header>
     <div class="wrapper">
+        <!-- menu lateral de navegacion -->
         <aside id="sidebar">
             <div class="d-flex">
                 <button id="toggle-btn" type="button">
@@ -54,7 +58,7 @@
             <ul class="sidebar-nav">
 
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="index.php?vista=fallos" class="sidebar-link">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.75 20.5V22H6.75C5.50736 22 4.5 20.9926 4.5 19.75V9.62105C4.5 9.02455 4.73686 8.45247 5.15851 8.03055L10.5262 2.65951C10.9482 2.23725 11.5207 2 12.1177 2H17.25C18.4926 2 19.5 3.00736 19.5 4.25V9.75H18V4.25C18 3.83579 17.6642 3.5 17.25 3.5H12.248L12.2509 7.4984C12.2518 8.74166 11.2442 9.75 10.0009 9.75H6V19.75C6 20.1642 6.33579 20.5 6.75 20.5H9.75ZM10.7488 4.55876L7.05986 8.25H10.0009C10.4153 8.25 10.7512 7.91389 10.7509 7.49947L10.7488 4.55876Z" fill="#343C54"/>
                             <path d="M12.4853 12.4853C12.1924 12.7782 12.1924 13.2531 12.4853 13.546L15.5643 16.625L12.4853 19.704C12.1924 19.9969 12.1924 20.4718 12.4853 20.7647C12.7782 21.0576 13.2531 21.0576 13.546 20.7647L16.625 17.6857L19.7026 20.7633C19.9955 21.0562 20.4704 21.0562 20.7633 20.7633C21.0562 20.4704 21.0562 19.9955 20.7633 19.7026L17.6857 16.625L20.7633 13.5474C21.0562 13.2545 21.0562 12.7796 20.7633 12.4867C20.4704 12.1938 19.9955 12.1938 19.7026 12.4867L16.625 15.5643L13.546 12.4853C13.2531 12.1924 12.7782 12.1924 12.4853 12.4853Z" fill="#343C54"/>
@@ -62,7 +66,7 @@
                         <span>Reportes de Fallos</span>
                     </a>
                 </li>
-
+                 <?php if (isset($_SESSION['usuario']['rol']) && $_SESSION['usuario']['rol'] === 'administrador'): ?>
                 <li class="sidebar-item">
                     <a href="index.php?vista=usuarios" class="sidebar-link">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
@@ -85,6 +89,7 @@
                         <span>Mantenimiento</span>
                     </a>
                 </li>
+                <?php endif; ?>
                  <li class="sidebar-item">
                     <a href="index.php?vista=dispositivos" class="sidebar-link">
                         <svg width="16" height="16" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">

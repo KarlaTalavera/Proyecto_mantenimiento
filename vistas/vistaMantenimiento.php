@@ -4,6 +4,7 @@
     <h1>Gestión de Mantenimientos</h1>
     <div class="titulo-linea"></div>
 
+    <!-- este formulario sirve para registrar o editar mantenimientos -->
     <form method="POST" class="device-form mb-4">
         <?php if ($editando && $mantenimientoEditar): ?>
             <input type="hidden" name="id" value="<?= htmlspecialchars($mantenimientoEditar['id']) ?>">
@@ -57,9 +58,11 @@
         </section>
         <div class="form-buttons">
             <?php if ($editando): ?>
+                <!-- si estas editando, muestra el boton de actualizar y el de cancelar -->
                 <button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button>
                 <a href="index.php?vista=mantenimiento" class="btn btn-secondary">Cancelar</a>
             <?php else: ?>
+                <!-- si no, solo muestra el boton de registrar -->
                 <button type="submit" name="registrar" class="btn btn-primary">Registrar</button>
             <?php endif; ?>
         </div>
@@ -69,6 +72,7 @@
     <!-- Tabla de Próximos Mantenimientos -->
     <h1>Próximos Mantenimientos</h1>
     <div class="titulo-linea"></div>
+    <!-- aca se muestra la tabla con los mantenimientos que aun no vencen -->
     <table class="device-table" id= "pendientes">
         <thead>
             <tr>
@@ -102,8 +106,8 @@
 
     <h1>Mantenimientos Pendientes</h1>
     <div class="titulo-linea"></div>
-    <!-- Tabla de Mantenimientos Pendientes -->
-    <table class="device-table" id="pendientes"  class="datatable">
+    <!-- aca se muestra la tabla con los mantenimientos que ya vencieron o estan pendientes -->
+    <table class="device-table" id="pendientes" >
         <thead>
             <tr>
                 <th>ID</th>
@@ -127,6 +131,7 @@
                     <td><?= htmlspecialchars($m['descripcion_proximo_mantenimiento']) ?></td>
                     <td>
                         <?php
+                        // busca el nombre de la persona asignada, si no hay muestra "Sin asignar"
                         $persona = '';
                         foreach ($usuarios as $u) {
                             if ($u['id'] == $m['persona_asignada']) {
@@ -141,6 +146,7 @@
                     <!-- COLUMNA ACCIÓN CENTRADA -->
                    <td class="text-center align-middle">
                         <?php if (!$m['persona_asignada']): ?>
+                            <!-- si nadie lo ha tomado, muestra el boton para tomarlo -->
                             <form method="POST" action="index.php?vista=mantenimiento#pendientes" class="d-inline-block">
                                 <input type="hidden" name="tomar_mantenimiento" value="<?= $m['id'] ?>">
                                 <button type="submit" class="btn btn-sm btn-outline-primary">Realizar este mantenimiento</button>
@@ -159,6 +165,7 @@
                             && $m['persona_asignada'] == $_SESSION['usuario']['id'] 
                             && empty($m['fecha_realizado'])
                         ): ?>
+                            <!-- si eres la persona asignada y no lo has realizado, muestra el boton para marcarlo como realizado -->
                             <form method="POST" action="index.php?vista=mantenimiento#pendientes" class="d-inline-block">
                                 <input type="hidden" name="realizar_mantenimiento" value="<?= $m['id'] ?>">
                                 <button type="submit" class="btn btn-sm btn-outline-success">Mantenimiento realizado</button>

@@ -13,11 +13,12 @@ class modeloMantenimiento {
     private $persona_asignada;
 
     public function __construct() {
+        // conecta a la base de datos cuando se crea el modelo
         $bd = new Base_Datos();
         $this->conexion = $bd->Conexion_Base_Datos();
     }
 
-    // Getters y setters
+    // metodos para obtener y poner los valores de los atributos
     public function getId() { return $this->id; }
     public function setId($id) { $this->id = $id; }
 
@@ -36,8 +37,8 @@ class modeloMantenimiento {
     public function getPersonaAsignada() { return $this->persona_asignada; }
     public function setPersonaAsignada($persona) { $this->persona_asignada = $persona; }
 
-
     public function agregarMantenimiento() {
+        // agrega un nuevo mantenimiento a la base de datos
         $sql = "INSERT INTO mantenimiento (codigo_dispositivo, fecha_ultimo_mantenimiento, fecha_proximo_mantenimiento, descripcion_proximo_mantenimiento, persona_asignada)
                 VALUES (:codigo_dispositivo, :fecha_ultimo, :fecha_proximo, :descripcion, :persona_asignada)";
         $stmt = $this->conexion->prepare($sql);
@@ -50,6 +51,7 @@ class modeloMantenimiento {
     }
 
     public function eliminarMantenimiento($id) {
+        // borra un mantenimiento por su id
         $sql = "DELETE FROM mantenimiento WHERE id = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -57,6 +59,7 @@ class modeloMantenimiento {
     }
 
     public function obtenerMantenimientoPorId($id) {
+        // busca un mantenimiento por su id
         $sql = "SELECT * FROM mantenimiento WHERE id = :id";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -65,6 +68,7 @@ class modeloMantenimiento {
     }
 
     public function actualizarMantenimiento() {
+        // actualiza los datos de un mantenimiento
         $sql = "UPDATE mantenimiento SET 
                     codigo_dispositivo = :codigo_dispositivo,
                     fecha_ultimo_mantenimiento = :fecha_ultimo,
@@ -83,13 +87,14 @@ class modeloMantenimiento {
     }
 
     public function listarProximosMantenimientos() {
+        // trae los mantenimientos que aun no vencen
         $sql = "SELECT * FROM mantenimiento WHERE fecha_proximo_mantenimiento > CURDATE() ORDER BY fecha_proximo_mantenimiento ASC";
         $stmt = $this->conexion->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Pendientes (vencidos y no tomados)
+    // trae los mantenimientos que ya vencieron y no han sido tomados
     public function listarMantenimientosPendientes() {
         $sql = "SELECT * FROM mantenimiento WHERE fecha_proximo_mantenimiento <= CURDATE() ORDER BY fecha_proximo_mantenimiento ASC";
         $stmt = $this->conexion->prepare($sql);
@@ -97,7 +102,7 @@ class modeloMantenimiento {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Asignar persona a un mantenimiento
+    // asigna una persona a un mantenimiento
     public function asignarPersona($id, $persona_id) {
         $sql = "UPDATE mantenimiento SET persona_asignada = :persona WHERE id = :id";
         $stmt = $this->conexion->prepare($sql);
@@ -107,24 +112,32 @@ class modeloMantenimiento {
     }
 
     public function marcarComoRealizado($id) {
-    $sql = "UPDATE mantenimiento SET fecha_realizado = CURDATE() WHERE id = :id";
-    $stmt = $this->conexion->prepare($sql);
-    $stmt->bindParam(':id', $id);
-    return $stmt->execute();
+        // marca el mantenimiento como realizado poniendo la fecha de hoy
+        $sql = "UPDATE mantenimiento SET fecha_realizado = CURDATE() WHERE id = :id";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
     }
 
     public function obtenerUltimaFechaRealizado($codigo_dispositivo) {
-    $sql = "SELECT fecha_realizado 
-            FROM mantenimiento 
-            WHERE codigo_dispositivo = :codigo_dispositivo 
-              AND fecha_realizado IS NOT NULL
-            ORDER BY fecha_realizado DESC 
-            LIMIT 1";
-    $stmt = $this->conexion->prepare($sql);
-    $stmt->bindParam(':codigo_dispositivo', $codigo_dispositivo);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $row ? $row['fecha_realizado'] : '';
+        // busca la ultima fecha en que se realizo el mantenimiento de un dispositivo
+        $sql = "SELECT fecha_realizado 
+                FROM mantenimiento 
+                WHERE codigo_dispositivo = :codigo_dispositivo 
+                  AND fecha_realizado IS NOT NULL
+                ORDER BY fecha_realizado DESC 
+                LIMIT 1";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':codigo_dispositivo', $codigo_dispositivo);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row ? $row['fecha_realizado'] : '';
+    }
+
+    public function editar($fallo_id, $usuario_id, $descripcion, $codigo_dispositivo, $nivel_urgencia) {
+        // permite editar la descripcion, dispositivo y urgencia de un fallo pendiente
+        $stmt = $this->conexion->prepare("UPDATE fallos SET descripcion=?, codigo_dispositivo=?, nivel_urgencia=? WHERE id=? AND id_usuario_reporta=? AND estado='pendiente'");
+        return $stmt->execute([$descripcion, $codigo_dispositivo, $nivel_urgencia, $fallo_id, $usuario_id]);
     }
 }
 ?>

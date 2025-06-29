@@ -13,31 +13,33 @@ class controladorMantenimiento {
     }
 
     public function mostrarMantenimientos() {
+        // inicializa variables para errores y edicion
         $error = '';
         $editando = false;
         $mantenimientoEditar = null;
 
-        // Para selects
+        // obtiene la lista de dispositivos para los selects
         $dispositivoModel = new modeloDispositivo();
         $dispositivos = $dispositivoModel->listarDispositivos();
 
+        // obtiene la lista de usuarios para los selects
         $usuarioModel = new modeloUsuario();
         $usuarios = $usuarioModel->obtenerUsuarios();
 
-        // Eliminar
+        // si se recibe el parametro eliminar, borra el mantenimiento y redirige
         if (isset($_GET['eliminar'])) {
             $this->modelo->eliminarMantenimiento($_GET['eliminar']);
             header("Location: index.php?vista=mantenimiento");
             exit();
         }
 
-        // Editar (mostrar datos)
+        // si se recibe el parametro editar, obtiene los datos del mantenimiento para editar
         if (isset($_GET['editar'])) {
             $mantenimientoEditar = $this->modelo->obtenerMantenimientoPorId($_GET['editar']);
             $editando = true;
         }
 
-        // Guardar edición
+        // si se envia el formulario de actualizacion, procesa la edicion del mantenimiento
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar'])) {
             $this->modelo->setId($_POST['id']);
             $this->modelo->setCodigoDispositivo($_POST['codigo_dispositivo']);
@@ -51,7 +53,7 @@ class controladorMantenimiento {
             exit();
         }
 
-           // Tomar mantenimiento pendiente
+        // si se envia el formulario para tomar mantenimiento pendiente, asigna la persona
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tomar_mantenimiento'])) {
             $id = $_POST['tomar_mantenimiento'];
             $usuario_id = $_SESSION['usuario']['id'];
@@ -60,17 +62,17 @@ class controladorMantenimiento {
             exit();
         }
 
-           // Registrar nuevo (NO asignar persona)
+        // si se envia el formulario de registro, agrega un nuevo mantenimiento sin asignar persona
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['registrar'])) {
             $this->modelo->setCodigoDispositivo($_POST['codigo_dispositivo']);
             $this->modelo->setFechaUltimoMantenimiento($_POST['fecha_ultimo_mantenimiento']);
             $this->modelo->setFechaProximoMantenimiento($_POST['fecha_proximo_mantenimiento']);
             $this->modelo->setDescripcionProximoMantenimiento($_POST['descripcion_proximo_mantenimiento']);
-            $this->modelo->setPersonaAsignada(null); // No asignar persona
+            $this->modelo->setPersonaAsignada(null);
 
             $this->modelo->agregarMantenimiento();
-            // Enviar correo
-                enviarCorreoMantenimiento(
+            // envia correo de notificacion de mantenimiento
+            enviarCorreoMantenimiento(
                 $_POST['codigo_dispositivo'],
                 $_POST['fecha_ultimo_mantenimiento'],
                 $_POST['fecha_proximo_mantenimiento'],
@@ -81,10 +83,11 @@ class controladorMantenimiento {
             exit();
         }
 
+        // si se envia el formulario para realizar mantenimiento, marca como realizado si corresponde
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['realizar_mantenimiento'])) {
             $id = $_POST['realizar_mantenimiento'];
             $mantenimiento = $this->modelo->obtenerMantenimientoPorId($id);
-            // Solo la persona asignada puede marcar como realizado
+            // solo la persona asignada puede marcar como realizado
             if ($mantenimiento && $mantenimiento['persona_asignada'] == $_SESSION['usuario']['id']) {
                 $this->modelo->marcarComoRealizado($id);
             }
@@ -92,15 +95,18 @@ class controladorMantenimiento {
             exit();
         }
 
-        // Listados
+        // obtiene la lista de proximos mantenimientos
         $proximos = $this->modelo->listarProximosMantenimientos();
+        // obtiene la lista de mantenimientos pendientes
         $pendientes = $this->modelo->listarMantenimientosPendientes();
-   
+
+        // obtiene las fechas del ultimo mantenimiento realizado por cada dispositivo
         $fechasUltimo = [];
         foreach ($dispositivos as $d) {
             $fechasUltimo[$d['codigo_dispositivo']] = $this->modelo->obtenerUltimaFechaRealizado($d['codigo_dispositivo']);
         }
 
+        // incluye la vista para mostrar los mantenimientos
         include dirname(__DIR__) . '/vistas/vistaMantenimiento.php';
     }
 }

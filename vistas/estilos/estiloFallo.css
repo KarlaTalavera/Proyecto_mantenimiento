@@ -1,0 +1,94 @@
+.fallo-form {
+    max-width: 600px;
+    margin: 0 auto 32px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(128,0,32,0.10);
+    padding: 24px 28px 18px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.fallo-form-row {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.fallo-form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-width: 150px;
+    margin-bottom: 0;
+}
+
+.fallo-form-group-full {
+    flex: 2 1 0;
+    min-width: 220px;
+}
+
+.fallo-form label {
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #7a0032;
+}
+
+.fallo-form input[type="text"],
+.fallo-form select {
+    border: none;
+    border-bottom: 1.5px solid #ccc;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    padding: 7px 2px 7px 2px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.fallo-form input[readonly] {
+    background: #f5f5f5;
+    color: #555;
+}
+
+.fallo-form input[type="text"]:focus,
+.fallo-form select:focus {
+    border-bottom: 1.5px solid #a8324a;
+    outline: none;
+    background: transparent;
+}
+
+.fallo-form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.fallo-form .btn-primary {
+    background: #a8324a;
+    border: none;
+    color: #fff;
+    padding: 8px 22px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.fallo-form .btn-primary:hover {
+    background: #7a0032;
+}
+
+.urgencia-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95em;
+}
+.urgencia-alta   { background: #d32f2f; }
+.urgencia-media  { background: #fbc02d; color: #333; }
+.urgencia-baja   { background: #388e3c; }

@@ -13,6 +13,7 @@
     align-items: center;
 }
 
+
 /* Fila de campos en flex */
 .device-form .form-row {
     display: flex;
@@ -86,28 +87,12 @@
     border-color: #a8324a;
 }
 
-/* Buscador */
-.device-table-search {
-    margin-bottom: 16px;
-    width: 100%;
-    max-width: 400px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid #bbb;
-    font-size: 1rem;
-    background: #fafbfe;
-    box-sizing: border-box;
-}
-
 /* Tabla de dispositivos */
 .device-table {
-    width: calc(100% - 48px) !important;
     max-width: 900px;
-    margin-left: 24px;
-    margin-right: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
     border-collapse: separate;
     border-spacing: 0;
     background: #fff;
@@ -122,6 +107,36 @@
     border-bottom: 1px solid #eee;
     text-align: left;
     font-size: 1rem;
+}
+
+.fallos-table {
+    max-width: 650px;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(128,0,32,0.10);
+}
+
+.fallos-table th, .fallos-table td {
+    padding: 4px 6px;
+    font-size: 0.80rem;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+.fallos-table td {
+    font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+    .main.p-3 {
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+    }
 }
 
 .device-table th {
