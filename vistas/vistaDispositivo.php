@@ -63,6 +63,10 @@
     <h1>Tabla de dispositivos</h1>
     <div class="titulo-linea"></div>
 
+    <?php
+    // detecta si el usuario es admin
+    $esAdmin = isset($_SESSION['usuario']['rol']) && $_SESSION['usuario']['rol'] === 'administrador';
+    ?>
     <!-- aca se muestra la tabla con todos los dispositivos registrados -->
     <table class="device-table" id="deviceTable"  class="datatable">
         <thead>
@@ -72,7 +76,9 @@
                 <th>Tipo</th>
                 <th>Ubicación</th>
                 <th>Número</th>
+            <?php if ($esAdmin): ?>
                 <th>Acciones</th>
+            <?php endif; ?>
             </tr>
         </thead>
         <tbody>
@@ -85,14 +91,15 @@
                         <td><?= htmlspecialchars($tipos[$dispositivo['tipo_dispositivo']] ?? $dispositivo['tipo_dispositivo']) ?></td>
                         <td><?= htmlspecialchars($ubicaciones[$dispositivo['ubicacion']] ?? $dispositivo['ubicacion']) ?></td>
                         <td><?= htmlspecialchars($dispositivo['numero_identificador']) ?></td>
+                        <?php if ($esAdmin): ?>
                         <td>
                             <div style="display:flex;align-items:center;gap:6px;">
-                                <!-- los botones para editar o eliminar el dispositivo -->
                                 <a href="index.php?vista=dispositivos&editar=<?= urlencode($dispositivo['codigo_dispositivo']) ?>" class="btn btn-sm btn-warning">Editar</a>
                                 <span>|</span>
-                                <a href="index.php?vista=dispositivos&eliminar=<?= urlencode($dispositivo['codigo_dispositivo']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este dispositivo?')">Eliminar</a>
+                                <a href="index.php?vista=dispositivos&eliminar=<?= urlencode($dispositivo['codigo_dispositivo']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este dispositivo? se eliminaran todos los registros en los que este presente')">Eliminar</a>
                             </div>
                         </td>
+                       <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

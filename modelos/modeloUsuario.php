@@ -141,6 +141,15 @@ class modeloUsuario {
         return $stmt->execute();
     }
 
+        public function obtenerPorId($id) {
+        // busca un usuario por su id
+        $sql = "SELECT * FROM usuarios WHERE id = :id LIMIT 1";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function listarTodos() {
         // devuelve solo el id, nombre y apellido de todos los usuarios
         $stmt = $this->conexion->query("SELECT id, nombre, apellido FROM usuarios");

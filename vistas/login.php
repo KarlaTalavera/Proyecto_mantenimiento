@@ -42,37 +42,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
     <link rel="stylesheet" href="estilos/estilologin.css">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet">
 </head>
-<body>
-    <section class="container">
-        <article class="formulario-contacto">
-            <section class="cabeza-formulario">
-                <span>Inicio</span>
-            </section>
-            <form method="POST" class="formulario">
-                <section class="input_box">
-                    <input type="text" id="usuario" name= "usuario" class="input-field" required>
-                    <label for="usuario" class="label">Usuario</label>
-                </section>
-
-                <section class="input_box">
-                    <input type="password" name= "contrasena" id="contrasena" class="input-field" required>
-                    <label for="contrasena" class="label">Contraseña</label>
-                </section>
-                <?php if ($error): ?>
-                        <div style="color: #ffb3b3; margin-bottom: 10px; text-align:center;"><?php echo $error; ?></div>
-                <?php endif; ?>
-                <button type="submit" class="submit-button">Iniciar Sesión</button>
-            </form>
-        </article>
-    </section>
-    
-</body>
+    <body>
+        <div class="login-center-container">
+            <div class="login-card-horizontal">
+                <div class="login-card-photo">
+                    <img src="/Mantenimiento-Ascardio/vistas/estilos/imagenes/ASCARDIO.png" alt="Logo Ascardio"" alt="Logo Ascardio">
+                </div>
+                <div class="login-card-form">
+                    <form method="POST" class="login-formbox" autocomplete="off">
+                        <div class="login-title">Inicio de Sesión</div>
+                        <?php if ($error): ?>
+                            <div class="login-error"><?php echo htmlspecialchars($error); ?></div>
+                        <?php endif; ?>
+                        <div class="login-inputbox">
+                            <input type="text" id="usuario" name="usuario" class="login-input" required autocomplete="username" placeholder=" " />
+                            <label for="usuario" class="login-label">Usuario</label>
+                            <i class="lni lni-user"></i>
+                        </div>
+                        <div class="login-inputbox">
+                            <input type="password" name="contrasena" id="contrasena" class="login-input" required autocomplete="current-password" placeholder=" " />
+                            <label for="contrasena" class="login-label">Contraseña</label>
+                            <i class="lni lni-lock"></i>
+                        </div>
+                        <button type="submit" class="login-btn">Iniciar Sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

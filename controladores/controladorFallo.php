@@ -2,6 +2,8 @@
 require_once dirname(__DIR__) . '/modelos/modeloFallo.php';
 require_once dirname(__DIR__) . '/modelos/modeloDispositivo.php';
 require_once dirname(__DIR__) . '/modelos/modeloUsuario.php';
+require_once dirname(__DIR__) . '/vistas/enviar.php';
+
 
 class controladorFallo {
     private $modelo;
@@ -19,7 +21,7 @@ class controladorFallo {
         $dispositivos = $modeloDispositivo->listarTodos();
 
         // inicializa la variable para editar fallos
-        $falloEditar = null; // esta linea es nueva
+        $falloEditar = null; 
 
         // maneja las acciones del usuario segun el metodo post
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,6 +33,23 @@ class controladorFallo {
                     'descripcion' => $_POST['descripcion'],
                     'nivel_urgencia' => $_POST['nivel_urgencia']
                 ]);
+
+                // Obtener datos del dispositivo
+                $modeloDispositivo = new modeloDispositivo();
+                $dispositivo = $modeloDispositivo->obtenerDispositivoPorCodigo($_POST['codigo_dispositivo']);
+
+                // Obtener datos del usuario
+                $modeloUsuario = new modeloUsuario();
+                $usuario = $modeloUsuario->obtenerPorId($usuario_id);
+
+               enviarCorreoFalloReportado(
+                    $_POST['codigo_dispositivo'],
+                    $dispositivo['ubicacion'] ?? '',
+                    $dispositivo['tipo_dispositivo'] ?? '',
+                    $_POST['nivel_urgencia'],
+                    $_POST['descripcion'],
+                    ($usuario['nombre'] ?? '') . ' ' . ($usuario['apellido'] ?? '')
+                );
                 header("Location: index.php?vista=fallos");
                 exit();
             }

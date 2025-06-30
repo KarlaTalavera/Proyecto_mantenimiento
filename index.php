@@ -14,7 +14,7 @@ require_once 'controladores/controladorMantenimiento.php';
 require_once 'controladores/controladorFallo.php';
 
 // toma la vista de la url o pone usuarios por defecto
-$vista = $_GET['vista'] ?? 'usuarios';
+$vista = $_GET['vista'] ?? 'fallos';
 $rol = $_SESSION['usuario']['rol'] ?? 'usuario';
 
 // segun la vista, crea el controlador y llama la funcion correspondiente es como si index fuera otro controlador

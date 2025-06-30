@@ -9,7 +9,7 @@ class controladorDispositivo {
     }
 
     public function mostrarDispositivos() {
-        // aca tienes las ubicaciones con su abreviatura, para que el usuario no tenga que escribir todo el nombre
+        // aca estan las ubicaciones con su abreviatura, para que el usuario no tenga que escribir todo el nombre
         $ubicaciones = [
             'CAR' => 'Cardiología',
             'LAB' => 'Laboratorio',
@@ -57,14 +57,14 @@ class controladorDispositivo {
         $editando = false;
         $dispositivoEditar = null;
 
-        // si te llega el parametro eliminar por la url, borra el dispositivo y vuelve a la lista
+        // si llega el parametro eliminar por la url, borra el dispositivo y vuelve a la lista
         if (isset($_GET['eliminar'])) {
             $this->modelo->eliminarDispositivo($_GET['eliminar']);
             header("Location: index.php?vista=dispositivos");
             exit();
         }
 
-        // si te llega el parametro editar, busca ese dispositivo y lo pone en modo edicion
+        // si llega el parametro editar, busca ese dispositivo y lo pone en modo edicion
         if (isset($_GET['editar'])) {
             $dispositivoEditar = $this->modelo->obtenerDispositivoPorCodigo($_GET['editar']);
             $editando = true;

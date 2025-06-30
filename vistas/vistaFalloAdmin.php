@@ -71,14 +71,14 @@
                                 echo "Tomado por mí";
                             } else {
                                 $admin = $usuariosMap[$f['id_admin_toma']] ?? 'Administrador';
-                                echo "Tomado por $admin";
+                                echo "Tomado";
                             }
                         } elseif ($f['estado'] == 'atendido') {
                             if ($f['id_admin_toma'] == $admin_id) {
                                 echo "Atendido por mí";
                             } else {
                                 $admin = $usuariosMap[$f['id_admin_toma']] ?? 'Administrador';
-                                echo "Atendido por $admin";
+                                echo "Atendido";
                             }
                         } elseif ($f['estado'] == 'por_confirmacion') {
                             echo "Por confirmación";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2025 a las 02:15:47
+-- Tiempo de generación: 30-06-2025 a las 03:29:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,9 +40,7 @@ CREATE TABLE `dispositivos` (
 --
 
 INSERT INTO `dispositivos` (`id`, `codigo_dispositivo`, `tipo_dispositivo`, `ubicacion`, `numero_identificador`) VALUES
-(13, 'LABCOM-9', 'Computadora', 'Laboratorio', 9),
-(14, 'QUIMON-7', 'Monitor', 'Quirófano', 7),
-(15, 'PATCOM-6', 'Computadora', 'Patología', 6);
+(19, 'LABCOM-3', 'Computadora', 'Laboratorio', 3);
 
 -- --------------------------------------------------------
 
@@ -64,14 +62,6 @@ CREATE TABLE `fallos` (
   `nivel_urgencia` enum('alto','medio','bajo') NOT NULL DEFAULT 'bajo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `fallos`
---
-
-INSERT INTO `fallos` (`id`, `id_usuario_reporta`, `id_admin_toma`, `codigo_dispositivo`, `descripcion`, `estado`, `fecha_reporte`, `fecha_tomado`, `fecha_atendido`, `fecha_resuelto`, `nivel_urgencia`) VALUES
-(9, 20, 13, 'QUIMON-7', 'Pantalla negra', 'resuelto', '2025-06-28 17:39:28', '2025-06-28 17:39:59', '2025-06-28 17:40:02', '2025-06-28 19:01:29', 'bajo'),
-(10, 20, 21, 'LABCOM-9', 'suena feo y va loento', 'tomado', '2025-06-28 17:41:22', '2025-06-28 18:49:05', NULL, NULL, 'bajo');
-
 -- --------------------------------------------------------
 
 --
@@ -87,14 +77,6 @@ CREATE TABLE `mantenimiento` (
   `persona_asignada` int(11) DEFAULT NULL,
   `fecha_realizado` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `mantenimiento`
---
-
-INSERT INTO `mantenimiento` (`id`, `codigo_dispositivo`, `fecha_ultimo_mantenimiento`, `fecha_proximo_mantenimiento`, `descripcion_proximo_mantenimiento`, `persona_asignada`, `fecha_realizado`) VALUES
-(13, 'QUIMON-7', '2025-04-04', '2025-06-28', 'Limpieza de componentes', 13, '2025-06-28'),
-(14, 'QUIMON-7', '2025-04-04', '2025-06-28', 'Limpieza de componentes', 13, '2025-06-28');
 
 -- --------------------------------------------------------
 
@@ -117,10 +99,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `usuario`, `contrasena`, `rol`) VALUES
 (13, 'karla', 'Talavera', 'eskarlatax', '$2y$10$DTHXhk9tSzBYt80DAfVR0.W/4Luw2xNL97FI3.28P9PYhYIw4PdIO', 'administrador'),
-(14, 'Laurys', 'Rivero', 'lau', '$2y$10$w7P2.uEkAyLaZfCQ1tf99OB6ugXW0egnhi5MSJfQfRiqq9R.kjy6K', 'administrador'),
 (20, 'Mengano', 'Perez', 'fulano', '$2y$10$eDdyvjhU7sfGTxy9sfab5.4EgpWWdlkA4mnRuZ0C4trN7SnpyqJsC', 'usuario'),
-(21, 'Kayler', 'Carrillo', 'keylex', '$2y$10$TJLlN4MCPkqWg7WzmBhJvOKJOt2mfrBqEDs7gbAV3VOzI03ozeuye', 'administrador'),
-(22, 'Franchesca', 'Izquierdo', 'fran', '$2y$10$Yoau0PBut7xsfO2zcOYDDe5AEdNPaPwfa.nxIQP0bf0SNjdHJeOTC', 'usuario');
+(23, 'Keyler', 'Carrillo', 'keylex', '$2y$10$vxOxRq9Jmg8xtJbttcpi7ePHufS7nEr3Cig/Lc/XtdQse/9ECp.eW', 'administrador');
 
 --
 -- Índices para tablas volcadas
@@ -138,17 +118,17 @@ ALTER TABLE `dispositivos`
 --
 ALTER TABLE `fallos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_usuario_reporta` (`id_usuario_reporta`),
-  ADD KEY `id_admin_toma` (`id_admin_toma`),
-  ADD KEY `codigo_dispositivo` (`codigo_dispositivo`);
+  ADD KEY `fallos_ibfk_1` (`id_usuario_reporta`),
+  ADD KEY `fallos_ibfk_2` (`id_admin_toma`),
+  ADD KEY `fallos_ibfk_3` (`codigo_dispositivo`);
 
 --
 -- Indices de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `codigo_dispositivo` (`codigo_dispositivo`),
-  ADD KEY `fk_persona_asignada` (`persona_asignada`);
+  ADD KEY `mantenimiento-res` (`codigo_dispositivo`),
+  ADD KEY `persona-asignada` (`persona_asignada`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -165,25 +145,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `dispositivos`
 --
 ALTER TABLE `dispositivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `fallos`
 --
 ALTER TABLE `fallos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas
@@ -193,16 +173,16 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `fallos`
 --
 ALTER TABLE `fallos`
-  ADD CONSTRAINT `fallos_ibfk_1` FOREIGN KEY (`id_usuario_reporta`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `fallos_ibfk_2` FOREIGN KEY (`id_admin_toma`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `fallos_ibfk_3` FOREIGN KEY (`codigo_dispositivo`) REFERENCES `dispositivos` (`codigo_dispositivo`);
+  ADD CONSTRAINT `fallos_ibfk_1` FOREIGN KEY (`id_usuario_reporta`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fallos_ibfk_2` FOREIGN KEY (`id_admin_toma`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fallos_ibfk_3` FOREIGN KEY (`codigo_dispositivo`) REFERENCES `dispositivos` (`codigo_dispositivo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  ADD CONSTRAINT `fk_persona_asignada` FOREIGN KEY (`persona_asignada`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `mantenimiento_ibfk_1` FOREIGN KEY (`codigo_dispositivo`) REFERENCES `dispositivos` (`codigo_dispositivo`);
+  ADD CONSTRAINT `mantenimiento-res` FOREIGN KEY (`codigo_dispositivo`) REFERENCES `dispositivos` (`codigo_dispositivo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `persona-asignada` FOREIGN KEY (`persona_asignada`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
