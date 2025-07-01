@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-06-2025 a las 03:29:13
+-- Tiempo de generación: 02-07-2025 a las 00:56:44
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,7 +40,10 @@ CREATE TABLE `dispositivos` (
 --
 
 INSERT INTO `dispositivos` (`id`, `codigo_dispositivo`, `tipo_dispositivo`, `ubicacion`, `numero_identificador`) VALUES
-(19, 'LABCOM-3', 'Computadora', 'Laboratorio', 3);
+(21, 'ADMIMP-1', 'Impresora', 'Administración', 1),
+(22, 'LABMON-12', 'Monitor', 'Laboratorio', 12),
+(23, 'ALMUPS-8', 'UPS / Batería de Respaldo', 'Almacén', 8),
+(24, 'MATHOS-9', 'Host/Máquina Virtual', 'Maternidad', 9);
 
 -- --------------------------------------------------------
 
@@ -62,6 +65,14 @@ CREATE TABLE `fallos` (
   `nivel_urgencia` enum('alto','medio','bajo') NOT NULL DEFAULT 'bajo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `fallos`
+--
+
+INSERT INTO `fallos` (`id`, `id_usuario_reporta`, `id_admin_toma`, `codigo_dispositivo`, `descripcion`, `estado`, `fecha_reporte`, `fecha_tomado`, `fecha_atendido`, `fecha_resuelto`, `nivel_urgencia`) VALUES
+(16, 24, 13, 'LABMON-12', 'No enciende', 'tomado', '2025-07-01 18:16:26', '2025-07-01 18:49:30', NULL, NULL, 'bajo'),
+(17, 24, NULL, 'ADMIMP-1', 'cartucho dañado', 'pendiente', '2025-07-01 18:17:20', NULL, NULL, NULL, 'alto');
+
 -- --------------------------------------------------------
 
 --
@@ -77,6 +88,15 @@ CREATE TABLE `mantenimiento` (
   `persona_asignada` int(11) DEFAULT NULL,
   `fecha_realizado` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `mantenimiento`
+--
+
+INSERT INTO `mantenimiento` (`id`, `codigo_dispositivo`, `fecha_ultimo_mantenimiento`, `fecha_proximo_mantenimiento`, `descripcion_proximo_mantenimiento`, `persona_asignada`, `fecha_realizado`) VALUES
+(18, 'LABMON-12', '2025-06-10', '2025-07-10', 'limpieza', NULL, NULL),
+(19, 'LABMON-12', '2025-04-03', '2025-08-02', 'necesita checkeo y limpieza', NULL, NULL),
+(20, 'ALMUPS-8', '2025-03-06', '2025-07-02', 'revision del proceso de control', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,7 +120,8 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `usuario`, `contrasena`, `rol`) VALUES
 (13, 'karla', 'Talavera', 'eskarlatax', '$2y$10$DTHXhk9tSzBYt80DAfVR0.W/4Luw2xNL97FI3.28P9PYhYIw4PdIO', 'administrador'),
 (20, 'Mengano', 'Perez', 'fulano', '$2y$10$eDdyvjhU7sfGTxy9sfab5.4EgpWWdlkA4mnRuZ0C4trN7SnpyqJsC', 'usuario'),
-(23, 'Keyler', 'Carrillo', 'keylex', '$2y$10$vxOxRq9Jmg8xtJbttcpi7ePHufS7nEr3Cig/Lc/XtdQse/9ECp.eW', 'administrador');
+(23, 'Keyler', 'Carrillo', 'keylex', '$2y$10$vxOxRq9Jmg8xtJbttcpi7ePHufS7nEr3Cig/Lc/XtdQse/9ECp.eW', 'administrador'),
+(24, 'laurys', 'Rivero', 'laurys', '$2y$10$ubSMs4XbEMpMjFqnRJaaLum8ftQ/FUI9r0UqiuBxV/hNPs/DRurea', 'usuario');
 
 --
 -- Índices para tablas volcadas
@@ -145,25 +166,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `dispositivos`
 --
 ALTER TABLE `dispositivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `fallos`
 --
 ALTER TABLE `fallos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Restricciones para tablas volcadas

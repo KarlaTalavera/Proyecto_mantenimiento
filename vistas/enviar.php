@@ -1,7 +1,7 @@
 <?php
 // importa las clases de phpmailer para poder enviar correos
 // esto debe ir arriba del todo
-
+/*
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -19,8 +19,8 @@ function enviarCorreoMantenimiento($codigo_dispositivo, $fecha_ultimo, $fecha_pr
         $mail->isSMTP(); // usa smtp para enviar el correo
         $mail->Host       = 'smtp.gmail.com'; // servidor smtp de gmail
         $mail->SMTPAuth   = true; // activa autenticacion smtp
-        $mail->Username   = 'katamaria2006@gmail.com'; // usuario smtp
-        $mail->Password   = 'idkzwqxmxbrbvipk'; // clave smtp
+        $mail->Username   = ''; // usuario smtp
+        $mail->Password   = ''; // clave smtp
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // usa tls implicito
         $mail->Port       = 465; // puerto para smtp seguro
 
@@ -76,8 +76,8 @@ function enviarCorreoFalloReportado($codigo_dispositivo, $ubicacion, $tipo, $niv
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'katamaria2006@gmail.com';
-        $mail->Password   = 'idkzwqxmxbrbvipk';
+        $mail->Username   = '';
+        $mail->Password   = '';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
@@ -128,4 +128,4 @@ function enviarCorreoFalloReportado($codigo_dispositivo, $ubicacion, $tipo, $niv
     } catch (Exception $e) {
         echo "El mensaje correo no pudo ser enviado, mailer error: {$mail->ErrorInfo}";
     }
-}
+}*/

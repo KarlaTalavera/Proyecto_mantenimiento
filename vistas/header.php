@@ -13,10 +13,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
-    <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/estiloFallo.css">
-    <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/style.css">
-    <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/estiloDispositivos.css">
-    <link rel="stylesheet" href="/Mantenimiento-Ascardio/vistas/estilos/estiloUsuarios.css">
+    <link rel="stylesheet" href="vistas/estilos/estiloFallo.css">
+    <link rel="stylesheet" href="vistas/estilos/style.css">
+    <link rel="stylesheet" href="vistas/estilos/estiloDispositivos.css">
+    <link rel="stylesheet" href="vistas/estilos/estiloUsuarios.css">
 </head>
 
 <body>

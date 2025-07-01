@@ -59,23 +59,23 @@
         </form>
 
     <div style="height:40px"></div>
+     <?php
+    // detecta si el usuario es admin
+    $esAdmin = isset($_SESSION['usuario']['rol']) && $_SESSION['usuario']['rol'] === 'administrador';
+    ?>
 
     <h1>Tabla de dispositivos</h1>
     <div class="titulo-linea"></div>
 
-    <?php
-    // detecta si el usuario es admin
-    $esAdmin = isset($_SESSION['usuario']['rol']) && $_SESSION['usuario']['rol'] === 'administrador';
-    ?>
     <!-- aca se muestra la tabla con todos los dispositivos registrados -->
-    <table class="device-table" id="deviceTable"  class="datatable">
+    <table class="device-table datatable" id="deviceTable">
         <thead>
             <tr>
                 <th>N°</th>
                 <th>Código</th>
                 <th>Tipo</th>
                 <th>Ubicación</th>
-                <th>Número</th>
+                <th>Número Identificador</th>
             <?php if ($esAdmin): ?>
                 <th>Acciones</th>
             <?php endif; ?>
@@ -103,7 +103,11 @@
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
-                <tr><td colspan="6">No hay dispositivos registrados.</td></tr>
+                <tr>
+                    <td colspan="<?= $esAdmin ? 6 : 5 ?>">
+                        No hay dispositivos registrados.
+                    </td>
+                </tr>
             <?php endif; ?>
         </tbody>
     </table>

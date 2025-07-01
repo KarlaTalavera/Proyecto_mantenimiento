@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="login-center-container">
             <div class="login-card-horizontal">
                 <div class="login-card-photo">
-                    <img src="/Mantenimiento-Ascardio/vistas/estilos/imagenes/ASCARDIO.png" alt="Logo Ascardio"" alt="Logo Ascardio">
+                    <img src="estilos/imagenes/ASCARDIO.png" alt="Logo Ascardio" alt="Logo Ascardio">
                 </div>
                 <div class="login-card-form">
                     <form method="POST" class="login-formbox" autocomplete="off">

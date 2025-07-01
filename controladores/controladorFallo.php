@@ -33,7 +33,7 @@ class controladorFallo {
                     'descripcion' => $_POST['descripcion'],
                     'nivel_urgencia' => $_POST['nivel_urgencia']
                 ]);
-
+                /*
                 // Obtener datos del dispositivo
                 $modeloDispositivo = new modeloDispositivo();
                 $dispositivo = $modeloDispositivo->obtenerDispositivoPorCodigo($_POST['codigo_dispositivo']);
@@ -49,7 +49,7 @@ class controladorFallo {
                     $_POST['nivel_urgencia'],
                     $_POST['descripcion'],
                     ($usuario['nombre'] ?? '') . ' ' . ($usuario['apellido'] ?? '')
-                );
+                ); */
                 header("Location: index.php?vista=fallos");
                 exit();
             }

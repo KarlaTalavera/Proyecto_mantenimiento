@@ -72,12 +72,13 @@ class controladorMantenimiento {
 
             $this->modelo->agregarMantenimiento();
             // envia correo de notificacion de mantenimiento
+            /*
             enviarCorreoMantenimiento(
                 $_POST['codigo_dispositivo'],
                 $_POST['fecha_ultimo_mantenimiento'],
                 $_POST['fecha_proximo_mantenimiento'],
                 $_POST['descripcion_proximo_mantenimiento']
-            );
+            );*/
 
             header("Location: index.php?vista=mantenimiento");
             exit();
