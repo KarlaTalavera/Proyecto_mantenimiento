@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-07-2025 a las 00:56:44
+-- Tiempo de generación: 07-07-2025 a las 17:16:59
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,7 +43,11 @@ INSERT INTO `dispositivos` (`id`, `codigo_dispositivo`, `tipo_dispositivo`, `ubi
 (21, 'ADMIMP-1', 'Impresora', 'Administración', 1),
 (22, 'LABMON-12', 'Monitor', 'Laboratorio', 12),
 (23, 'ALMUPS-8', 'UPS / Batería de Respaldo', 'Almacén', 8),
-(24, 'MATHOS-9', 'Host/Máquina Virtual', 'Maternidad', 9);
+(24, 'MATHOS-9', 'Host/Máquina Virtual', 'Maternidad', 9),
+(25, 'LABSER-9', 'Servidor', 'Laboratorio', 9),
+(26, 'PEDIMP-3', 'Impresora', 'Pediatría', 3),
+(27, 'QUIMON-8', 'Monitor', 'Quirófano', 8),
+(28, 'MATIMP-3', 'Impresora', 'Maternidad', 3);
 
 -- --------------------------------------------------------
 
@@ -70,8 +74,14 @@ CREATE TABLE `fallos` (
 --
 
 INSERT INTO `fallos` (`id`, `id_usuario_reporta`, `id_admin_toma`, `codigo_dispositivo`, `descripcion`, `estado`, `fecha_reporte`, `fecha_tomado`, `fecha_atendido`, `fecha_resuelto`, `nivel_urgencia`) VALUES
-(16, 24, 13, 'LABMON-12', 'No enciende', 'tomado', '2025-07-01 18:16:26', '2025-07-01 18:49:30', NULL, NULL, 'bajo'),
-(17, 24, NULL, 'ADMIMP-1', 'cartucho dañado', 'pendiente', '2025-07-01 18:17:20', NULL, NULL, NULL, 'alto');
+(16, 24, 13, 'LABMON-12', 'No enciende', 'resuelto', '2025-07-01 18:16:26', '2025-07-01 18:49:30', '2025-07-06 18:29:10', '2025-07-06 18:29:36', 'bajo'),
+(17, 24, 13, 'ADMIMP-1', 'cartucho dañado', 'resuelto', '2025-07-01 18:17:20', '2025-07-06 18:29:14', '2025-07-06 18:29:59', '2025-07-06 18:30:46', 'alto'),
+(18, 24, 13, 'LABSER-9', 'Esta caido', 'resuelto', '2025-07-06 18:33:43', '2025-07-06 18:35:09', '2025-07-06 18:36:46', '2025-07-06 19:08:24', 'medio'),
+(19, 24, 13, 'LABSER-9', 'esta caido', 'persistente', '2025-07-06 19:08:36', '2025-07-06 19:08:57', '2025-07-07 10:16:07', NULL, 'alto'),
+(20, 20, 23, 'ALMUPS-8', 'se acabo la bateria', 'tomado', '2025-07-07 10:37:12', '2025-07-07 10:37:32', NULL, NULL, 'medio'),
+(21, 24, 13, 'PEDIMP-3', 'cartuchos quemados', 'por_confirmacion', '2025-07-07 10:38:26', '2025-07-07 10:43:17', '2025-07-07 10:43:19', NULL, 'alto'),
+(22, 25, 13, 'LABSER-9', 'sigue caido', 'tomado', '2025-07-07 10:40:13', '2025-07-07 10:40:56', NULL, NULL, 'alto'),
+(23, 25, NULL, 'ADMIMP-1', 'cartucho dañado', 'pendiente', '2025-07-07 10:42:30', NULL, NULL, NULL, 'medio');
 
 -- --------------------------------------------------------
 
@@ -96,7 +106,9 @@ CREATE TABLE `mantenimiento` (
 INSERT INTO `mantenimiento` (`id`, `codigo_dispositivo`, `fecha_ultimo_mantenimiento`, `fecha_proximo_mantenimiento`, `descripcion_proximo_mantenimiento`, `persona_asignada`, `fecha_realizado`) VALUES
 (18, 'LABMON-12', '2025-06-10', '2025-07-10', 'limpieza', NULL, NULL),
 (19, 'LABMON-12', '2025-04-03', '2025-08-02', 'necesita checkeo y limpieza', NULL, NULL),
-(20, 'ALMUPS-8', '2025-03-06', '2025-07-02', 'revision del proceso de control', NULL, NULL);
+(20, 'ALMUPS-8', '2025-03-06', '2025-07-02', 'revision del proceso de control', 13, '2025-07-07'),
+(21, 'ALMUPS-8', '2025-05-01', '2025-07-07', 'revision y cambio de baterias', NULL, NULL),
+(22, 'MATIMP-3', '2025-07-04', '2025-07-07', 'cambio de cartuchos', 13, NULL);
 
 -- --------------------------------------------------------
 
@@ -121,7 +133,8 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `usuario`, `contrasena`, `ro
 (13, 'karla', 'Talavera', 'eskarlatax', '$2y$10$DTHXhk9tSzBYt80DAfVR0.W/4Luw2xNL97FI3.28P9PYhYIw4PdIO', 'administrador'),
 (20, 'Mengano', 'Perez', 'fulano', '$2y$10$eDdyvjhU7sfGTxy9sfab5.4EgpWWdlkA4mnRuZ0C4trN7SnpyqJsC', 'usuario'),
 (23, 'Keyler', 'Carrillo', 'keylex', '$2y$10$vxOxRq9Jmg8xtJbttcpi7ePHufS7nEr3Cig/Lc/XtdQse/9ECp.eW', 'administrador'),
-(24, 'laurys', 'Rivero', 'laurys', '$2y$10$ubSMs4XbEMpMjFqnRJaaLum8ftQ/FUI9r0UqiuBxV/hNPs/DRurea', 'usuario');
+(24, 'laurys', 'Rivero', 'laurys', '$2y$10$ubSMs4XbEMpMjFqnRJaaLum8ftQ/FUI9r0UqiuBxV/hNPs/DRurea', 'usuario'),
+(25, 'Humberto', 'Casique', 'humbe', '$2y$10$7hJIEZCogfV93dPPHYXYLeYNIWbENZLGPlbbKj1ai7jpPm2epk.Ge', 'usuario');
 
 --
 -- Índices para tablas volcadas
@@ -166,25 +179,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `dispositivos`
 --
 ALTER TABLE `dispositivos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `fallos`
 --
 ALTER TABLE `fallos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Restricciones para tablas volcadas

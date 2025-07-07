@@ -39,8 +39,11 @@ switch ($vista) {
             $controlador->mostrarFalloUsuario();
         }
         break;
-    case 'manual':
+    case 'manualUsuario':
         include 'vistas/manualUsuario.php';
+        break;
+    case 'manualAdmin':
+        include 'vistas/manualAdmin.php';
         break;
     default:
         echo "Vista no encontrada";

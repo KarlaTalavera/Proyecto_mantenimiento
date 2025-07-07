@@ -47,7 +47,7 @@
           previous: "Anterior"
         }
       },
-      pageLength: 5,
+      pageLength: 10,
       lengthChange: true,
       searching: true,
       ordering: true,

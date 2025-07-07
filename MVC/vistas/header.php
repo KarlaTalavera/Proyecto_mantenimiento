@@ -64,6 +64,16 @@
                         <span>Reportes de Fallos</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="index.php?vista=dispositivos" class="sidebar-link">
+                        <svg width="20" height="20" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
+                            <path d="M18.1551 7.03906V6.87162C18.1551 6.26272 17.9083 5.67982 17.4711 5.25602L16.3139 4.1344C15.8942 3.72753 15.3325 3.5 14.7479 3.5H8.09493C6.85229 3.5 5.84493 4.50736 5.84493 5.75V7.03906H18.1551Z" fill="#343C54"/>
+                            <path d="M5.50049 8.03906C4.25785 8.03906 3.25049 9.04642 3.25049 10.2891V14.2076C3.25049 15.2221 3.92196 16.0798 4.84473 16.3605V14.1953C4.84473 13.2288 5.62823 12.4453 6.59473 12.4453H17.4049C18.3714 12.4453 19.1549 13.2288 19.1549 14.1953V16.3606C20.0779 16.0801 20.7496 15.2223 20.7496 14.2076V10.2891C20.7496 9.04642 19.7422 8.03906 18.4996 8.03906H5.50049Z" fill="#343C54"/>
+                            <path d="M5.84473 18.749C5.84473 19.9916 6.85209 20.999 8.09473 20.999H15.9049C17.1475 20.999 18.1549 19.9916 18.1549 18.749V14.1953C18.1549 13.7811 17.8191 13.4453 17.4049 13.4453H6.59473C6.18051 13.4453 5.84473 13.7811 5.84473 14.1953V18.749Z" fill="#343C54"/>
+                        </svg>
+                        <span>Gestión de dispositivos</span>
+                    </a>
+                </li>
                  <?php if (isset($_SESSION['usuario']['rol']) && $_SESSION['usuario']['rol'] === 'administrador'): ?>
                 <li class="sidebar-item">
                     <a href="index.php?vista=usuarios" class="sidebar-link">
@@ -87,20 +97,17 @@
                         <span>Mantenimiento</span>
                     </a>
                 </li>
-                <?php endif; ?>
+
                  <li class="sidebar-item">
-                    <a href="index.php?vista=dispositivos" class="sidebar-link">
-                        <svg width="20" height="20" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
-                            <path d="M18.1551 7.03906V6.87162C18.1551 6.26272 17.9083 5.67982 17.4711 5.25602L16.3139 4.1344C15.8942 3.72753 15.3325 3.5 14.7479 3.5H8.09493C6.85229 3.5 5.84493 4.50736 5.84493 5.75V7.03906H18.1551Z" fill="#343C54"/>
-                            <path d="M5.50049 8.03906C4.25785 8.03906 3.25049 9.04642 3.25049 10.2891V14.2076C3.25049 15.2221 3.92196 16.0798 4.84473 16.3605V14.1953C4.84473 13.2288 5.62823 12.4453 6.59473 12.4453H17.4049C18.3714 12.4453 19.1549 13.2288 19.1549 14.1953V16.3606C20.0779 16.0801 20.7496 15.2223 20.7496 14.2076V10.2891C20.7496 9.04642 19.7422 8.03906 18.4996 8.03906H5.50049Z" fill="#343C54"/>
-                            <path d="M5.84473 18.749C5.84473 19.9916 6.85209 20.999 8.09473 20.999H15.9049C17.1475 20.999 18.1549 19.9916 18.1549 18.749V14.1953C18.1549 13.7811 17.8191 13.4453 17.4049 13.4453H6.59473C6.18051 13.4453 5.84473 13.7811 5.84473 14.1953V18.749Z" fill="#343C54"/>
-                        </svg>
-                        <span>Gestión de dispositivos</span>
+                    <a href="index.php?vista=manualAdmin" class="sidebar-link">
+                        <svg  width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
+                        <span>Manual de Usuario</span>
                     </a>
                 </li>
+                <?php endif; ?>
                 <?php if (isset($_SESSION['usuario']['rol']) && $_SESSION['usuario']['rol'] === 'usuario'): ?>
                 <li class="sidebar-item">
-                    <a href="index.php?vista=manual" class="sidebar-link">
+                    <a href="index.php?vista=manualUsuario" class="sidebar-link">
                         <svg  width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
                         <span>Manual de Usuario</span>
                     </a>
