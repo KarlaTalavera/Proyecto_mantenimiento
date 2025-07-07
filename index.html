@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo 6 - Sistema de Información</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header class="header-transparente position-absolute w-100 top-0">
+        <div class="container d-flex justify-content-between align-items-center py-3">
+            <a href="#" class="logo d-flex align-items-center text-white text-decoration-none">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30" height="30" fill="white" class="me-2">
+                    <path d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9zM144 221.3c0-33.8 27.4-61.3 61.3-61.3c16.2 0 31.8 6.5 43.3 17.9l7.4 7.4 7.4-7.4c11.5-11.5 27.1-17.9 43.3-17.9c33.8 0 61.3 27.4 61.3 61.3c0 16.2-6.5 31.8-17.9 43.3l-82.7 82.7c-6.2 6.2-16.4 6.2-22.6 0l-82.7-82.7c-11.5-11.5-17.9-27.1-17.9-43.3z"/>
+                </svg>
+                <span class="fw-bold fs-5">Sistema de Control de Mantenimiento</span>
+            </a>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link text-white" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#casos-uso">Casos de Uso</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#nuestro-sistema">Nuestro Sistema</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#contacto-form">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="MVC/index.php">Iniciar sesion</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="carousel-section vh-100 position-relative">
+            <div id="carouselExampleIndicators" class="carousel slide h-100" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner h-100">
+                    <div class="carousel-item active h-100">
+                        <img src="imagenes-inicio/equipo.png" class="d-block w-100 h-100 object-fit-cover" alt="Equipo 6">
+                        <div class="carousel-caption d-flex align-items-end justify-content-start h-100 text-start ps-5 pb-5">
+                            <article class="p-4 rounded carousel-text-side">
+                                <hgroup>
+                                    <h2 class="display-4 fw-bold slide1-h2">¡Hola! Somos el Equipo 6</h2>
+                                    <p class="lead slide1-p">Conformado por Keyler Carrillo, Humberto Casique, Franchesca Izquierdo y Karla Talavera. Juntos, creamos soluciones innovadoras para ti.</p>
+                                </hgroup>
+                                <a href="#contacto-form" class="btn btn-primary btn-lg mt-3">Contáctenos</a>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="carousel-item h-100">
+                        <img src="imagenes-inicio/bienvenida.png" class="d-block w-100 h-100 object-fit-cover" alt="Bienvenida">
+                        <div class="carousel-caption d-flex align-items-end justify-content-start h-100 text-start ps-5 pb-5">
+                            <article class="p-4 rounded carousel-text-side">
+                                <hgroup>
+                                    <h2 class="display-4 fw-bold">¡Bienvenidos a Nuestro Espacio!</h2>
+                                    <p class="lead">Explora cómo nuestro sistema de información puede transformar y optimizar tus operaciones diarias con eficiencia y facilidad.</p>
+                                </hgroup>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="carousel-item h-100">
+                        <img src="imagenes-inicio/sistema.png" class="d-block w-100 h-100 object-fit-cover" alt="Nuestro Sistema">
+                        <div class="carousel-caption d-flex align-items-end justify-content-end h-100 text-end pe-7 pb-7">
+                            <article class="p-4 rounded carousel-text-side">
+                                <hgroup>
+                                    <h2 class="display-4 fw-bold">Descubre Nuestro Sistema de Información</h2>
+                                    <p class="lead">Una solución integral diseñada para optimizar la gestión, mejorar la comunicación y potenciar la productividad en tu organización.</p>
+                                </hgroup>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="casos-uso" class="container my-5 py-5 reveal">
+            <hgroup class="text-center mb-5">
+                <h2>¿Para Quién es Nuestro Sistema?</h2>
+                <p class="lead">Conoce cómo nuestra solución se adapta a tus necesidades.</p>
+            </hgroup>
+
+            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                <article class="col reveal-item">
+                    <div class="card h-100 shadow-sm card-hover-effect">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                            class="card-img-top" 
+                            alt="Clínica hospitalaria" 
+                            style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">Clínicas y Hospitales</h3>
+                            <p class="card-text">¿Usted tiene una clínica con varios trabajadores y necesita comunicar problemas o fallos a través de reportes? ¡No se preocupe, que este sistema es para usted!</p>
+                            <a href="#contacto-form" class="btn btn-primary mt-3">Contáctenos</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="col reveal-item">
+                    <div class="card h-100 shadow-sm card-hover-effect">
+                        <img src="https://images.unsplash.com/photo-1486401899868-0e435ed85128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                            class="card-img-top" 
+                            alt="Fábrica manufacturera" 
+                            style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">Empresas Manufactureras</h3>
+                            <p class="card-text">Optimiza la comunicación interna y el reporte de incidentes en tu planta de producción. Asegura la fluidez de la información.</p>
+                            <a href="#contacto-form" class="btn btn-primary mt-3">Contáctenos</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="col reveal-item">
+                    <div class="card h-100 shadow-sm card-hover-effect">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                            class="card-img-top" 
+                            alt="Instituto educativo" 
+                            style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">Instituciones Educativas</h3>
+                            <p class="card-text">Facilita la gestión de reportes y la comunicación entre personal, profesores y estudiantes. Mejora la eficiencia académica.</p>
+                            <a href="#contacto-form" class="btn btn-primary mt-3">Contáctenos</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="nuestro-sistema" class="container my-5 py-5 reveal">
+        <hgroup class="text-center mb-5">
+            <h2>Nuestro Sistema: La Solución que Necesitas</h2>
+        </hgroup>
+
+        <article class="sistema">
+            <figure class="circle-float">
+            <img src="imagenes-inicio/ASCARDIO.gif" alt="Imagen del Sistema" class="img-fluid">
+            </figure>
+            <p class="lead">Sistema especializado en reporte de fallos y programación de mantenimiento preventivo, desarrollado como proyecto final de programación por estudiantes del Instituto Universitario Jesús Obrero (IUJO).</p>
+                
+                <h4 class="mt-4">Reporte de Fallos</h4>
+                <p>Nuestra plataforma permite reportar fallos técnicos de manera inmediata, generando automáticamente notificaciones por correo electrónico a los responsables correspondientes, asegurando una respuesta rápida y eficiente. Este sistema 
+                    esta basado actualmente para funcionar dentro de la estructura hospitalaria de ASCARDIO, lugar donde realizamos nuestras pasantías tempranas.
+                </p>
+                
+                <h4>Mantenimiento Preventivo</h4>
+                <p>Programa mantenimientos preventivos con fechas personalizadas, recibiendo recordatorios automáticos. El sistema registra todo el historial de mantenimientos realizados para cada equipo o área.</p>
+                
+                <h4>Notificaciones Automáticas</h4>
+                <p>Cada reporte de fallo o programación de mantenimiento genera notificaciones instantáneas por correo electrónico, manteniendo a todo el equipo informado en tiempo real.</p>
+        </article>
+        </section>
+        
+        <section id="contacto-form" class="contact-form-section">
+            <div class="container">
+                <h2 class="text-center mb-3" style="color: azure;">Contáctenos</h2>
+                <p class="text-center mb-5" style="color: beige;">Complete el formulario y nos pondremos en contacto</p>
+                
+                <form class="glass-form">
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" class="form-control" placeholder="Nombre completo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" class="form-control" placeholder="Correo electrónico" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" class="form-control" placeholder="Teléfono (opcional)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <i class="fas fa-comment"></i>
+                        <textarea class="form-control" rows="4" placeholder="Escriba su mensaje..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane me-2"></i> Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer-custom py-5">
+    <div class="container">
+        <div class="row">
+            <nav class="col-md-4 mb-4 mb-md-0">
+                <div class="footer-logo mb-4 d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40" height="40" fill="white" class="me-2">
+                        <path d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9zM144 221.3c0-33.8 27.4-61.3 61.3-61.3c16.2 0 31.8 6.5 43.3 17.9l7.4 7.4 7.4-7.4c11.5-11.5 27.1-17.9 43.3-17.9c33.8 0 61.3 27.4 61.3 61.3c0 16.2-6.5 31.8-17.9 43.3l-82.7 82.7c-6.2 6.2-16.4 6.2-22.6 0l-82.7-82.7c-11.5-11.5-17.9-27.1-17.9-43.3z"/>
+                    </svg>
+                    <span class="fw-bold fs-5 text-white">Sistema de Control de Mantenimiento</span>
+                </div>
+                <p>Te ayudamos a gestionar tu negocio. Di hola a la pagina web que podría ser tu mano derecha. Hecho con amor por el Equipo 6 (mentira, odiamos PHP).</p>
+                <div class="social-icons mt-3">
+                    <a href="#" target="_blank" class="text-decoration-none me-3"><i class="fab fa-facebook-f fa-2x text-white"></i></a>
+                    <a href="#" target="_blank" class="text-decoration-none me-3"><i class="fab fa-twitter fa-2x text-white"></i></a>
+                    <a href="#" target="_blank" class="text-decoration-none me-3"><i class="fab fa-linkedin-in fa-2x text-white"></i></a>
+                    <a href="#" target="_blank" class="text-decoration-none"><i class="fab fa-instagram fa-2x text-white"></i></a>
+                </div>
+            </nav>
+
+            <nav class="col-md-4 mb-4 mb-md-0"> <h4 class="text-white mb-3">Nuestra Empresa</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-white-50">Sobre Nosotros</a></li>
+                    <li class="mb-2"><a href="#casos-uso" class="text-decoration-none text-white-50">Casos de Uso</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-white-50">Términos de Uso</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-white-50">Blog</a></li>
+                </ul>
+            </nav>
+
+            <nav class="col-md-4 mb-4 mb-md-0"> <h4 class="text-white mb-3">Nuestros Servicios</h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-white-50">Gestión de Reportes</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-white-50">Comunicación Interna</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-white-50">Seguimiento de Tareas</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-white-50">Análisis de Incidencias</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</footer>
+
+    <button id="scrollToTopBtn" class="btn btn-primary rounded-circle shadow-lg"><i class="fas fa-chevron-up"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>

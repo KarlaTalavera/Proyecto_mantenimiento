@@ -59,9 +59,7 @@
 
                 <li class="sidebar-item">
                     <a href="index.php?vista=fallos" class="sidebar-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.75 20.5V22H6.75C5.50736 22 4.5 20.9926 4.5 19.75V9.62105C4.5 9.02455 4.73686 8.45247 5.15851 8.03055L10.5262 2.65951C10.9482 2.23725 11.5207 2 12.1177 2H17.25C18.4926 2 19.5 3.00736 19.5 4.25V9.75H18V4.25C18 3.83579 17.6642 3.5 17.25 3.5H12.248L12.2509 7.4984C12.2518 8.74166 11.2442 9.75 10.0009 9.75H6V19.75C6 20.1642 6.33579 20.5 6.75 20.5H9.75ZM10.7488 4.55876L7.05986 8.25H10.0009C10.4153 8.25 10.7512 7.91389 10.7509 7.49947L10.7488 4.55876Z" fill="#343C54"/>
-                            <path d="M12.4853 12.4853C12.1924 12.7782 12.1924 13.2531 12.4853 13.546L15.5643 16.625L12.4853 19.704C12.1924 19.9969 12.1924 20.4718 12.4853 20.7647C12.7782 21.0576 13.2531 21.0576 13.546 20.7647L16.625 17.6857L19.7026 20.7633C19.9955 21.0562 20.4704 21.0562 20.7633 20.7633C21.0562 20.4704 21.0562 19.9955 20.7633 19.7026L17.6857 16.625L20.7633 13.5474C21.0562 13.2545 21.0562 12.7796 20.7633 12.4867C20.4704 12.1938 19.9955 12.1938 19.7026 12.4867L16.625 15.5643L13.546 12.4853C13.2531 12.1924 12.7782 12.1924 12.4853 12.4853Z" fill="#343C54"/>
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/>
                         </svg>
                         <span>Reportes de Fallos</span>
                     </a>
@@ -92,7 +90,7 @@
                 <?php endif; ?>
                  <li class="sidebar-item">
                     <a href="index.php?vista=dispositivos" class="sidebar-link">
-                        <svg width="16" height="16" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
+                        <svg width="20" height="20" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
                             <path d="M18.1551 7.03906V6.87162C18.1551 6.26272 17.9083 5.67982 17.4711 5.25602L16.3139 4.1344C15.8942 3.72753 15.3325 3.5 14.7479 3.5H8.09493C6.85229 3.5 5.84493 4.50736 5.84493 5.75V7.03906H18.1551Z" fill="#343C54"/>
                             <path d="M5.50049 8.03906C4.25785 8.03906 3.25049 9.04642 3.25049 10.2891V14.2076C3.25049 15.2221 3.92196 16.0798 4.84473 16.3605V14.1953C4.84473 13.2288 5.62823 12.4453 6.59473 12.4453H17.4049C18.3714 12.4453 19.1549 13.2288 19.1549 14.1953V16.3606C20.0779 16.0801 20.7496 15.2223 20.7496 14.2076V10.2891C20.7496 9.04642 19.7422 8.03906 18.4996 8.03906H5.50049Z" fill="#343C54"/>
                             <path d="M5.84473 18.749C5.84473 19.9916 6.85209 20.999 8.09473 20.999H15.9049C17.1475 20.999 18.1549 19.9916 18.1549 18.749V14.1953C18.1549 13.7811 17.8191 13.4453 17.4049 13.4453H6.59473C6.18051 13.4453 5.84473 13.7811 5.84473 14.1953V18.749Z" fill="#343C54"/>
@@ -100,6 +98,14 @@
                         <span>Gestión de dispositivos</span>
                     </a>
                 </li>
+                <?php if (isset($_SESSION['usuario']['rol']) && $_SESSION['usuario']['rol'] === 'usuario'): ?>
+                <li class="sidebar-item">
+                    <a href="index.php?vista=manual" class="sidebar-link">
+                        <svg  width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
+                        <span>Manual de Usuario</span>
+                    </a>
+                </li>
+                <?php endif; ?>
             </ul>
             <div class="sidebar-item">
                 <a href="vistas/logout.php" class="sidebar-link">

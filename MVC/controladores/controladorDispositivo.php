@@ -17,6 +17,7 @@ class controladorDispositivo {
             'ADM' => 'Administración',
             'URG' => 'Urgencias',
             'RX'  => 'Rayos X / Radiología',
+            'MAT' => 'Maternidad',
             'UCI' => 'Unidad de Cuidados Intensivos',
             'FARM'=> 'Farmacia',
             'ALM' => 'Almacén',
@@ -28,7 +29,6 @@ class controladorDispositivo {
             'MNT' => 'Mantenimiento',
             'LIM' => 'Limpieza',
             'PED' => 'Pediatría',
-            'MAT' => 'Maternidad',
             'NEU' => 'Neurología'
         ];
 

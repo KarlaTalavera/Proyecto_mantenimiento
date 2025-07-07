@@ -148,6 +148,28 @@ body {
 .login-btn:hover {
     background: #be4646;
 }
+
+.header-transparente {
+    background-color: rgba(33, 37, 41, 0.8); /* Negro oscuro semi-transparente */
+    position: absolute; /* header flota sobre el carrusel */
+    top: 0;
+    width: 100%;
+    z-index: 1030; /* Asegura que esté por encima de otros elementos */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.header-transparente .nav-link {
+    color: white !important;
+}
+
+.header-transparente .nav-link:hover {
+    color: #007bff !important;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 40px; /* Ajusta según el tamaño de tu logo */
+}
 @media (max-width: 900px) {
     .login-card-horizontal {
         flex-direction: column;
