@@ -19,8 +19,8 @@ function enviarCorreoMantenimiento($codigo_dispositivo, $fecha_ultimo, $fecha_pr
         $mail->isSMTP(); // usa smtp para enviar el correo
         $mail->Host       = 'smtp.gmail.com'; // servidor smtp de gmail
         $mail->SMTPAuth   = true; // activa autenticacion smtp
-        $mail->Username   = ''; // usuario smtp
-        $mail->Password   = ''; // clave smtp
+        $mail->Username   = 'katamaria2006@gmail.com'; // usuario smtp
+        $mail->Password   = 'rjrpkyiopkcqwjsl'; // clave smtp
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // usa tls implicito
         $mail->Port       = 465; // puerto para smtp seguro
 
@@ -32,8 +32,8 @@ function enviarCorreoMantenimiento($codigo_dispositivo, $fecha_ultimo, $fecha_pr
         $mail->isHTML(true); // el correo es html
         $mail->Subject = 'Mantenimiento Ascardio';
         $mail->Body    = '
-        <div style="font-family: Arial, sans-serif; background: #f7f7f7; padding: 30px;">
-            <div style="max-width: 500px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #e0e0e0; padding: 24px;">
+        <div style="font-family: Arial, sans-serif; background:rgb(230, 230, 230); padding: 30px;">
+            <div style="max-width: 500px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8pxrgb(204, 204, 204); padding: 24px;">
                 <h2 style="color:rgb(163, 52, 52); border-bottom: 1px solid #eee; padding-bottom: 10px;">Nuevo Mantenimiento Programado</h2>
                 <table style="width:100%; border-collapse:collapse; font-size:16px;">
                     <tr>
@@ -76,8 +76,8 @@ function enviarCorreoFalloReportado($codigo_dispositivo, $ubicacion, $tipo, $niv
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = '';
-        $mail->Password   = '';
+        $mail->Username   = 'katamaria2006@gmail.com';
+        $mail->Password   = 'rjrpkyiopkcqwjsl';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
@@ -87,8 +87,8 @@ function enviarCorreoFalloReportado($codigo_dispositivo, $ubicacion, $tipo, $niv
         $mail->isHTML(true);
         $mail->Subject = 'Nuevo fallo reportado en Ascardio';
         $mail->Body    = '
-        <div style="font-family: Arial, sans-serif; background: #f7f7f7; padding: 30px;">
-            <div style="max-width: 500px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #e0e0e0; padding: 24px;">
+        <div style="font-family: Arial, sans-serif; background:rgb(230, 230, 230); padding: 30px;">
+            <div style="max-width: 500px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8pxrgb(209, 209, 209); padding: 24px;">
                 <h2 style="color:rgb(163, 52, 52); border-bottom: 1px solid #eee; padding-bottom: 10px;">Nuevo fallo reportado</h2>
                 <table style="width:100%; border-collapse:collapse; font-size:16px;">
                     <tr>

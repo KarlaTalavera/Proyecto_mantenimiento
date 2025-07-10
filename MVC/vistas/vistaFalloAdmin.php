@@ -122,11 +122,84 @@
                                     echo $admin;?> puede gestionar</span>
                                 <?php endif; ?>
                             </div>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+                            </form>
+                            <?php
+                                // Inicializar los contadores
+                                $contadorUrgencias = [
+                                    'alto' => 0,
+                                    'medio' => 0,
+                                    'bajo' => 0,
+                                ];
+
+                                // Recorrer los fallos para contar los niveles
+                                foreach ($fallos as $f) {
+                                    $nivel = strtolower($f['nivel_urgencia']);
+                                    if (isset($contadorUrgencias[$nivel])) {
+                                        $contadorUrgencias[$nivel]++;
+                                    }
+                                }
+
+                            
+                            ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                
+            </tbody>
+        </table>
+        <tr>
+        <td>
+            <h3>Gráfico de Niveles de Urgencia</h3>
+            <canvas id="urgencyChart" width="300" height="350" ></canvas>
+        </td>
+        </tr>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('urgencyChart').getContext('2d');
+
+            const data = {
+                labels: ['Alta', 'Media', 'Baja'],
+                datasets: [{
+                    label: 'Niveles de urgencia',
+                    data: [
+                        <?= $contadorUrgencias['alto'] ?>,
+                        <?= $contadorUrgencias['medio'] ?>,
+                        <?= $contadorUrgencias['bajo'] ?>,
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)', // Rojo
+                        'rgba(255, 206, 86, 0.6)', // Amarillo
+                        'rgba(75, 192, 192, 0.6)'  // Verde
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            const config = {
+                type: 'pie',
+                data: data,
+                options: {
+                    responsive: false,
+                    width: 300,
+                    height: 300,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                    }
+                },
+            };
+
+
+            new Chart(ctx, config);
+        });
+    </script>
+
 </div>
 <?php include 'footer.php'; ?>

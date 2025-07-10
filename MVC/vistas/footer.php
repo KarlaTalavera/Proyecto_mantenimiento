@@ -55,6 +55,7 @@
       autoWidth: false
     });
 </script>
+
 <script>
     // autollenado de ubicacion y tipo segun el dispositivo seleccionado
     document.addEventListener('DOMContentLoaded', function() {
